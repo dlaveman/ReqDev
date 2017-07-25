@@ -1,4 +1,4 @@
-  { STRING, VIRTUAL, ARRAY, TEXT, INTEGER } = require('sequelize');
+const { STRING, VIRTUAL, ARRAY, TEXT, INTEGER } = require('sequelize');
 
 module.exports = db =>
   db.define(
@@ -18,16 +18,16 @@ module.exports = db =>
           notEmpty: true
         }
       },
-            photo: {
+      photo: {
         type: STRING,
         defaultValue: '/images/default-photo.jpg'
       },
       skills: {
         type: ARRAY(STRING),
         defaultValue: [],
-        set: function(skills) {
+        set: function (skills) {
           skills = skills || [];
-          if (typeof skills ==='string') {
+          if (typeof skills === 'string') {
             skills = skills.split(',').map(str => str.trim());
           }
           this.setDataValue('skills', skills);
@@ -46,3 +46,9 @@ module.exports = db =>
       indexes: [{ fields: ['email'], unique: true }]
     }
   );
+
+module.exports.associations = (Developer, { Order, Cart, Category, Review }) => {
+  Developer.belongsToMany(Category, {through: 'DeveloperCategory'})
+  Developer.hasOne(Review)
+  Developer.hasOne(Order)
+}

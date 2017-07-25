@@ -1,4 +1,4 @@
-  { STRING, INTEGER } = require('sequelize');
+const { STRING, INTEGER } = require('sequelize');
 
 module.exports = db =>
   db.define(
@@ -6,8 +6,9 @@ module.exports = db =>
     {
       comment: STRING,
       rating: {
-		    type: INTEGER,
-		    validate: { min: 0, max: 5 }
-  }
+        type: INTEGER,
+        validate: { min: 0, max: 5 }
+      }
     }
   );
+

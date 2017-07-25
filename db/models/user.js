@@ -48,9 +48,11 @@ module.exports = db =>
     }
   );
 
-module.exports.associations = (User, { OAuth, Thing, Favorite }) => {
+module.exports.associations = (User, { Order, Cart, OAuth, Review }) => {
   User.hasOne(OAuth);
-  User.belongsToMany(Thing, { as: 'favorites', through: Favorite });
+  User.hasOne(Cart);
+  User.hasOne(Order);
+  User.hasOne(Review);
 };
 
 function setEmailAndPassword(user) {

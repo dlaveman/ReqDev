@@ -1,4 +1,4 @@
-  { STRING, TEXT } = require('sequelize');
+const { STRING, TEXT } = require('sequelize');
 
 module.exports = db =>
   db.define(
@@ -14,3 +14,7 @@ module.exports = db =>
       description: TEXT
     }
   );
+
+module.exports.associations = (Category, { Developer }) => {
+  Category.belongsToMany(Developer, {through: 'DeveloperCategory'});
+};
