@@ -1,16 +1,21 @@
-'use strict';
+'use strict'
 
-const db = require('APP/db'),
-  { User, Thing, Favorite, Promise } = db,
-  { mapValues } = require('lodash');
+const db = require('APP/db')
+  , {User, Favorite, Developer, Category, Cart, Order, Review, Promise } = db
+  , {mapValues } = require('lodash')
+  , DeveloperCategory = db.model('DeveloperCategory');
 
 function seedEverything() {
   const seeded = {
     users: users(),
-    things: things()
+    developers: developers(),
+    categories: categories(),
   };
 
-  seeded.favorites = favorites(seeded);
+  seeded.devCat = devCat(seeded);
+  seeded.carts = carts(seeded);
+  seeded.orders = orders(seeded);
+  seeded.reviews = reviews(seeded);
 
   return Promise.props(seeded);
 }
@@ -28,43 +33,138 @@ const users = seed(User, {
   }
 });
 
-const things = seed(Thing, {
-  surfing: { name: 'surfing' },
-  smiting: { name: 'smiting' },
-  puppies: { name: 'puppies' }
+const developers = seed(Developer, {
+  Joe: {
+    name: 'Joe',
+    email: 'joe@gmail.com',
+    rate: 80
+  },
+  Jane: {
+    name: 'Jane',
+    email: 'jane@gmail.com',
+    rate: 90
+  },
+  Boris: {
+    name: 'Boris',
+    email: 'boris@gmail.com',
+    rate: 100
+  }
 });
 
-const favorites = seed(
-  Favorite,
-  // We're specifying a function here, rather than just a rows object.
-  // Using a function lets us receive the previously-seeded rows (the seed
-  // function does this wiring for us).
-  //
-  // This lets us reference previously-created rows in order to create the join
-  // rows. We can reference them by the names we used above (which is why we used
-  // Objects above, rather than just arrays).
-  ({ users, things }) => ({
-    // The easiest way to seed associations seems to be to just create rows
-    // in the join table.
-    'obama loves surfing': {
-      user_id: users.barack.id, // users.barack is an instance of the User model
-      // that we created in the user seed above.
-      // The seed function wires the promises so that it'll
-      // have been created already.
-      thing_id: things.surfing.id // Same thing for things.
+const categories = seed(Category, {
+  WebDev: { name: 'Web Developer' },
+  MobileDev: { name: 'Mobile Developer' },
+  GameDev: { name: 'Game Developer' }
+});
+
+const devCat = seed(DeveloperCategory,
+  ({ developers, categories }) => ({
+    'Joe loves Web': {
+      developer_id: developers.Joe.id, 
+      category_id: categories.WebDev.id 
     },
-    'god is into smiting': {
+    'Joe loves Mobile': {
+      developer_id: developers.Joe.id, 
+      category_id: categories.MobileDev.id 
+    },
+    'Jane loves Web': {
+      developer_id: developers.Jane.id, 
+      category_id: categories.WebDev.id 
+    },
+    'Joe loves Games': {
+      developer_id: developers.Jane.id, 
+      category_id: categories.GameDev.id 
+    },
+    'Boris loves Mobile': {
+      developer_id: developers.Boris.id, 
+      category_id: categories.MobileDev.id 
+    },
+  })
+);
+
+const carts = seed(Cart,
+  ({ developers, users }) => ({
+    'CartA1': {
+      developer_id: developers.Joe.id,
       user_id: users.god.id,
-      thing_id: things.smiting.id
+      hours: 5
     },
-    'obama loves puppies': {
+    'CartA2': {
+      developer_id: developers.Jane.id,
+      user_id: users.god.id,
+      hours: 4
+    },
+    'CartB1': {
+      developer_id: developers.Joe.id,
       user_id: users.barack.id,
-      thing_id: things.puppies.id
+      hours: 10
     },
-    'god loves puppies': {
+    'CartB2': {
+      developer_id: developers.Boris.id,
+      user_id: users.barack.id,
+      hours: 5
+    },
+    'CartB3': {
+      developer_id: developers.Jane.id,
+      user_id: users.barack.id,
+      hours: 5
+    },
+  })
+);
+const orders = seed(Order,
+  ({ developers, users }) => ({
+    'OrdrA1': {
+      developer_id: developers.Joe.id,
+      rate: developers.Joe.rate,
       user_id: users.god.id,
-      thing_id: things.puppies.id
-    }
+      hours: 5,
+      orderId: 1234 
+    },
+    'OrdrA2': {
+      developer_id: developers.Jane.id,
+      rate: developers.Jane.rate,
+      user_id: users.god.id,
+      hours: 4,
+      orderId: 1234 
+    },
+    'OrdrB1': {
+      developer_id: developers.Joe.id,
+      rate: developers.Joe.rate,
+      user_id: users.barack.id,
+      hours: 10,
+      orderId: 1235 
+    },
+    'OrdrB2': {
+      developer_id: developers.Boris.id,
+      rate: developers.Boris.rate,
+      user_id: users.barack.id,
+      hours: 5,
+      orderId: 1235 
+    },
+    'OrdrB3': {
+      developer_id: developers.Jane.id,
+      rate: developers.Jane.rate,
+      user_id: users.barack.id,
+      hours: 5,
+      orderId: 1235 
+    },
+  })
+);
+
+const reviews = seed(Review,
+  ({ developers, users }) => ({
+    'Review Joe': {
+      developer_id: developers.Joe.id,
+      user_id: users.god.id,
+      comment: "Joe is awesome",
+      rating: 5
+    },
+    'Review Jane': {
+      developer_id: developers.Jane.id,
+      user_id: users.god.id,
+      comment: "Jane is amazing",
+      rating: 5
+    },
   })
 );
 
@@ -146,4 +246,5 @@ function seed(Model, rows) {
   };
 }
 
-module.exports = Object.assign(seed, { users, things, favorites });
+//module.exports = Object.assign(seed, { users, things, favorites });
+module.exports = Object.assign(seed, { users, devCat });
