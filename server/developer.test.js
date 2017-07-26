@@ -25,12 +25,13 @@ describe('/api/developer', () => {
 
   describe('GET /developer/:id', () => {
     describe('when getting a developer/:id', () =>
-      it('responds with the developer', () =>
-        request(app).get('/api/developer/9999')
+      it ('responds with the developer', () => {
+        return request(app).get('/api/developer/9999')
           .expect(200)
           .then(res => expect(res.body).to.contain({
             name: "Louie"
           }))
+      }
       ))
     })
   })

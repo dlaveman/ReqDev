@@ -109,6 +109,10 @@ const carts = seed(Cart,
       user_id: users.barack.id,
       hours: 5
     },
+    'CartC1': {
+      user_id: users.barack.id,
+      hours: 12
+    },
   })
 );
 const orders = seed(Order,
