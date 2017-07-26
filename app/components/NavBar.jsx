@@ -1,19 +1,35 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-const NavBar = () => {
-  return (
-    <nav className="navbar navbar-default nav nav-justified nav-pills">
-      {/*{location.href.substr(24, 33) === 'campuses' || location.href.substr(24, 33) === '' ?*/}
-      <li role="presentation" className="active">
-        <NavLink to="/categories"><h2>Categories</h2></NavLink>
-      </li>
-      <li role="presentation">
-        <NavLink to="/login" ><h2>Login</h2></NavLink>
-      </li>
-      <li>
-        <NavLink to="/signUp"><h2>Sign Up</h2></NavLink>
-      </li>
-    </nav>
-  );
+import AppBar from 'material-ui/AppBar';
+import DropDownMenu from 'material-ui/DropDownMenu'
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import IconMenu from 'material-ui/IconMenu';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconButton from 'material-ui/IconButton';
+import { Tabs, Tab } from 'material-ui'
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: 0 };
+  }
+  handleChange = (event, index, value) => this.setState({ value });
+  render() {
+    return (
+      <AppBar title="ReqDev"
+        iconElementRight={<div><FlatButton label="login" containerElement={<NavLink to="/login" />} />
+          <FlatButton label='sign up' containerElement={<NavLink to="/signUp" />} />
+        </div>}
+        iconElementLeft={<DropDownMenu value={this.state.value} onChange={this.handleChange}>
+          <MenuItem value={0} primaryText="Choose a Category" />
+          <MenuItem value={1} containerElement={<NavLink to="/categories" />} primaryText="category 1" />
+          <MenuItem value={2} primaryText="category 2" />
+        </DropDownMenu>}
+      />
+    )
+  }
 };
-export default NavBar;
