@@ -20,34 +20,39 @@ import {
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import store from './store';
-import Jokes from './components/Jokes';
-import Login from './components/Login';
-import WhoAmI from './components/WhoAmI';
-import NotFound from './components/NotFound';
-import NavBar from './components/NavBar';
-import Categories from './components/Categories';
-import Home from './components/Home';
+import store from './store'
+import Jokes from './components/Jokes'
+import Login from './components/Login'
+import WhoAmI from './components/WhoAmI'
+import NotFound from './components/NotFound'
+import NavBar from './components/NavBar'
+import Categories from './components/Categories'
+import Home from './components/Home'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const ExampleApp = connect(({ auth }) => ({
-  user: auth
-}))(({ user, children }) =>
-  <div>
-    <NavBar />
-    {/*<nav>
+const ExampleApp = connect(
+  ({ auth }) => ({ user: auth })
+)(
+  ({ user, children }) =>
+        <Router>
+    <div>
+      <MuiThemeProvider>
+      <NavBar/>
+      </MuiThemeProvider>
+      {/*<nav>
         {user ? <WhoAmI/> : <Login/>}
       </nav>*/}
-    <main>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/categories" component={Categories} />
-        <Route path="/login" component={Login} />
-        <Route component={NotFound} />
-      </Switch>
-    </main>
-  </div>
-);
-
+      <main>
+        <Switch>
+          <Route path="/categories" component={Categories}/>
+          <Route path="/login" component={Login}/>
+          <Route exact path="/" component={Home} />
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+    </div>
+          </Router>
+)
 render(
   <Provider store={store}>
     <Router>
