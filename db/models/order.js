@@ -4,6 +4,13 @@ module.exports = db =>
   db.define(
     'orders',
     {
+      orderId: {
+        type: INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       hours: {
         type: INTEGER,
         allowNull: false,
@@ -12,13 +19,13 @@ module.exports = db =>
           notEmpty: true
         }
       },
-      price: {
+      rate: {
         type: INTEGER,
         allowNull: false,
         validate: {
           notEmpty: true
         }
-      }
+      },
     }
   );
 
