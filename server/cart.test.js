@@ -16,6 +16,7 @@ describe('/api/cart/userId', () => {
     // afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
     beforeEach('create a cart', () => {
+        // OB/JL: you can use `include` with create: https://sequelize.readthedocs.io/en/v3/docs/associations/#creating-with-associations
       return User.create({
         email: alice.username,
         password: alice.password,

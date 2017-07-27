@@ -2,6 +2,8 @@ import axios from 'axios'
 
 const GET_CATEGORIES = 'GET_CATEGORIES';
 
+// OB/JL: normalizr (normalizing redux store state)
+
 export const getCategories= categories=>({type: GET_CATEGORIES, categories})
 
 export function fetchCategories() {

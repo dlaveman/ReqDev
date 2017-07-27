@@ -8,6 +8,8 @@ import { Row, Col, Card, Input, Icon } from 'react-materialize'
 export default class SignUp extends Component {
   constructor(props) {
     super(props)
+    // OB/JL: not actually necessary to bind
+    // OB/JL: but if you do, you can use arrow function syntax in a class to achieve that
     this.onSignupSubmit = this.onSignupSubmit.bind(this)
   }
 

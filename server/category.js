@@ -12,6 +12,7 @@ module.exports = require('express').Router()
     Category.create(req.body)
       .then(category => res.status(201).json(category))
       .catch(next))
+  // OB/JL: if you have the other all developers route, you may not need this one
   .get('/:categoryId', (req, res, next) =>
     Category.findById(req.params.categoryId)
       .then(category => res.json(category))

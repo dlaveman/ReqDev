@@ -4,6 +4,7 @@ const db = require('APP/db')
 const Cart = db.model('carts')
 
 module.exports = require('express').Router()
+  // OB/JL: you can potentially use `req.user.id`
   .get('/:userId', (req, res, next) =>
     Cart.findAll({ where: { user_id: req.params.userId } })
       .then(carts => res.json(carts))

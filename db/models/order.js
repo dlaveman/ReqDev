@@ -1,5 +1,6 @@
 const { INTEGER } = require('sequelize')
 
+// OB/JL: consider converting this into an OrderItem model, and also making an Order model (that hasMany OrderItem)
 module.exports = db =>
   db.define('orders', {
     orderId: {

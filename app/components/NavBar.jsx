@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 class NavBar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { value: 0 }
+    this.state = { value: 0 } // OB/JL: name "value", "category" instead
   }
   componentDidMount() {
     console.log(this.props)
@@ -47,6 +47,7 @@ const mapStateToProps = state => {
     categories: state.categories,
   }
 }
+// OB/JL: can use object format (but you already knew that)
 const mapDispatchToProps = dispatch => {
   return {
     fetchCategories: () => {
@@ -56,6 +57,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+// OB/JL: undead code, bury it (keep it out of master)
 // const mapStateToProps = (state) => {
 //   return {
 //     categories: state.categories
