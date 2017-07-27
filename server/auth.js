@@ -40,9 +40,9 @@ OAuth.setupStrategy({
   config: {
     clientID: env.FACEBOOK_CLIENT_ID,
     clientSecret: env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/facebook`
+    callbackURL: `${app.baseUrl}/api/auth/login/facebook`,
   },
-  passport
+  passport,
 })
 
 // Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
@@ -53,9 +53,9 @@ OAuth.setupStrategy({
   config: {
     clientID: env.GOOGLE_CLIENT_ID,
     clientSecret: env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/google`
+    callbackURL: `${app.baseUrl}/api/auth/login/google`,
   },
-  passport
+  passport,
 })
 
 // Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
@@ -66,9 +66,9 @@ OAuth.setupStrategy({
   config: {
     clientID: env.GITHUB_CLIENT_ID,
     clientSecret: env.GITHUB_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/github`
+    callbackURL: `${app.baseUrl}/api/auth/login/github`,
   },
-  passport
+  passport,
 })
 
 // Other passport configuration:
@@ -98,7 +98,7 @@ passport.use(
     debug('will authenticate user(email: "%s")', email)
     User.findOne({
       where: { email },
-      attributes: { include: ['password_digest'] }
+      attributes: { include: ['password_digest'] },
     })
       .then(user => {
         if (!user) {
@@ -113,13 +113,13 @@ passport.use(
           debug(
             'authenticate user(email: "%s") did ok: user.id=%d',
             email,
-            user.id
+            user.id,
           )
           done(null, user)
         })
       })
       .catch(done)
-  })
+  }),
 )
 
 auth.get('/whoami', (req, res) => res.send(req.user))
@@ -127,7 +127,7 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 // POST requests for local login:
 auth.post(
   '/login/local',
-  passport.authenticate('local', { successRedirect: '/' })
+  passport.authenticate('local', { successRedirect: '/' }),
 )
 
 // GET requests for OAuth login:
@@ -137,9 +137,9 @@ auth.get('/login/:strategy', (req, res, next) =>
     scope: 'email', // You may want to ask for additional OAuth scopes. These are
     // provider specific, and let you access additional data (like
     // their friends or email), or perform actions on their behalf.
-    successRedirect: '/'
+    successRedirect: '/',
     // Specify other config here
-  })(req, res, next)
+  })(req, res, next),
 )
 
 auth.post('/logout', (req, res) => {

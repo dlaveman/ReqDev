@@ -7,7 +7,7 @@ const app = require('./start')
 const alice = {
   username: 'alice@secrets.org',
   password: '12345',
-  name: "Alice"
+  name: 'Alice',
 }
 
 /* global describe it before afterEach beforeEach */
@@ -19,8 +19,8 @@ describe('/api/auth', () => {
     User.create({
       email: alice.username,
       password: alice.password,
-      name: "Alice"
-    })
+      name: 'Alice',
+    }),
   )
 
   describe('POST /login/local (username, password)', () => {
@@ -52,7 +52,7 @@ describe('/api/auth', () => {
       const agent = request.agent(app)
 
       beforeEach('log in', () =>
-        agent.post('/api/auth/login/local').send(alice)
+        agent.post('/api/auth/login/local').send(alice),
       )
 
       it('responds with the currently logged in user', () =>
@@ -62,8 +62,8 @@ describe('/api/auth', () => {
           .expect(200)
           .then(res =>
             expect(res.body).to.contain({
-              email: alice.username
-            })
+              email: alice.username,
+            }),
           ))
     })
   })
@@ -73,7 +73,7 @@ describe('/api/auth', () => {
       const agent = request.agent(app)
 
       beforeEach('log in', () =>
-        agent.post('/api/auth/login/local').send(alice)
+        agent.post('/api/auth/login/local').send(alice),
       )
 
       it('logs you out and redirects to whoami', () =>
@@ -85,7 +85,7 @@ describe('/api/auth', () => {
             agent
               .get('/api/auth/whoami')
               .expect(200)
-              .then(rsp => expect(rsp.body).eql({}))
+              .then(rsp => expect(rsp.body).eql({})),
           ))
     }))
 })

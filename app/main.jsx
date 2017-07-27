@@ -14,7 +14,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom'
 
 import store from './store'
@@ -27,7 +27,7 @@ import Categories from './components/Categories'
 import Home from './components/Home'
 
 const ExampleApp = connect(({ auth }) => ({
-  user: auth
+  user: auth,
 }))(({ user, children }) =>
   <Router>
     <div>
@@ -44,7 +44,7 @@ const ExampleApp = connect(({ auth }) => ({
         </Switch>
       </main>
     </div>
-  </Router>
+  </Router>,
 )
 render(
   <Provider store={store}>
@@ -52,5 +52,5 @@ render(
       <ExampleApp />
     </Router>
   </Provider>,
-  document.getElementById('main')
+  document.getElementById('main'),
 )

@@ -10,7 +10,7 @@ import Jokes from './Jokes'
 describe('<Jokes />', () => {
   const joke = {
     q: 'Why did the skeleton write tests?',
-    a: 'To see if she did anything bone-headed.'
+    a: 'To see if she did anything bone-headed.',
   }
 
   let root

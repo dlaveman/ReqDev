@@ -1,4 +1,4 @@
-const { STRING, VIRTUAL, ARRAY, TEXT, INTEGER } = require('sequelize');
+const { STRING, VIRTUAL, ARRAY, TEXT, INTEGER } = require('sequelize')
 
 module.exports = db =>
   db.define(
@@ -8,47 +8,50 @@ module.exports = db =>
         type: STRING,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       email: {
         type: STRING,
         validate: {
           isEmail: true,
-          notEmpty: true
-        }
+          notEmpty: true,
+        },
       },
       photo: {
         type: STRING,
-        defaultValue: '/images/default-photo.jpg'
+        defaultValue: '/images/default-photo.jpg',
       },
       skills: {
         type: ARRAY(STRING),
         defaultValue: [],
-        set: function (skills) {
-          skills = skills || [];
+        set: function(skills) {
+          skills = skills || []
           if (typeof skills === 'string') {
-            skills = skills.split(',').map(str => str.trim());
+            skills = skills.split(',').map(str => str.trim())
           }
-          this.setDataValue('skills', skills);
-        }
+          this.setDataValue('skills', skills)
+        },
       },
       description: TEXT,
       rate: {
         type: INTEGER,
         allowNull: false,
         validate: {
-          notEmpty: true
-        }
-      }
+          notEmpty: true,
+        },
+      },
     },
     {
-      indexes: [{ fields: ['email'], unique: true }]
-    }
-  );
+      indexes: [{ fields: ['email'], unique: true }],
+    },
+  )
 
-module.exports.associations = (Developer, { Order, Cart, Category, Review }) => {
-  Developer.belongsToMany(Category, {through: 'DeveloperCategory'})
+module.exports.associations = (
+  Developer,
+  { Order, Cart, Category, Review },
+) => {
+  Developer.belongsToMany(Category, { through: 'DeveloperCategory' })
   Developer.hasOne(Review)
   Developer.hasOne(Order)
   Developer.hasMany(Cart);

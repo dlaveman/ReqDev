@@ -9,8 +9,8 @@ import { whoami } from './reducers/auth'
 const store = createStore(
 	rootReducer,
 	composeWithDevTools(
-		applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-	)
+		applyMiddleware(thunkMiddleware, createLogger({ collapsed: true })),
+	),
 )
 
 export default store

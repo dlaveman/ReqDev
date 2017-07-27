@@ -22,7 +22,7 @@ describe('/api/users', () => {
           .send({
             email: 'beth@secrets.org',
             password: '12345',
-            name: "Beth"
+            name: 'Beth',
           })
           .expect(201))
 
@@ -32,13 +32,13 @@ describe('/api/users', () => {
           .send({
             email: 'eve@interloper.com',
             password: '23456',
-            name: "Beth"
+            name: 'Beth',
           })
           .redirects(1)
           .then(res =>
             expect(res.body).to.contain({
-              email: 'eve@interloper.com'
-            })
+              email: 'eve@interloper.com',
+            }),
           ))
     }))
 })

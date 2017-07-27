@@ -11,13 +11,13 @@ import WhoAmIContainer, { WhoAmI } from './WhoAmI'
 /* global describe it beforeEach */
 describe('<WhoAmI/>', () => {
   const user = {
-    name: 'Dr. Bones'
+    name: 'Dr. Bones',
   }
   const logout = spy()
   let root
   beforeEach(
     'render the root',
-    () => (root = shallow(<WhoAmI user={user} logout={logout} />))
+    () => (root = shallow(<WhoAmI user={user} logout={logout} />)),
   )
 
   it('greets the user', () => {
@@ -36,7 +36,7 @@ describe('<WhoAmI/>', () => {
 
 describe("<WhoAmI/>'s connection", () => {
   const state = {
-    auth: { name: 'Dr. Bones' }
+    auth: { name: 'Dr. Bones' },
   }
 
   let root, store, dispatch
