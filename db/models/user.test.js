@@ -1,8 +1,8 @@
 'use strict'
 
-const db = require('APP/db')
-    , {User} = db
-    , {expect} = require('chai')
+const db = require('APP/db'),
+  { User } = db,
+  { expect } = require('chai')
 
 /* global describe it before afterEach */
 
