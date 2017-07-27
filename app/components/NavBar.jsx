@@ -28,7 +28,7 @@ export default class NavBar extends React.Component {
             />
             <FlatButton
               label="sign up"
-              containerElement={<NavLink to="/signUp" />}
+              containerElement={<NavLink to="/signup" />}
             />
           </div>
         }

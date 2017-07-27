@@ -4,8 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // name, email, photo, password
 const style = {
-  height: 200,
-  width: 100,
+  height: 500,
+  width: 500,
   margin: 20,
   textAlign: 'center',
   display: 'inline-block'
@@ -13,7 +13,7 @@ const style = {
 export const SignUp = ({ login }) => {
   return (
     <MuiThemeProvider>
-      <Paper style={style} zDepth={1} />
+      <Paper style={style} zDepth={2} />
     </MuiThemeProvider>
   );
 };
