@@ -54,6 +54,7 @@ const developers = seed(Developer, {
 const categories = seed(Category, {
   WebDev: { name: 'Web Developer' },
   MobileDev: { name: 'Mobile Developer' },
+
   GameDev: { name: 'Game Developer' },
 })
 
@@ -105,6 +106,10 @@ const carts = seed(Cart, ({ developers, users }) => ({
     developer_id: developers.Jane.id,
     user_id: users.barack.id,
     hours: 5,
+  },
+  CartC1: {
+    user_id: users.barack.id,
+    hours: 12,
   },
 }))
 const orders = seed(Order, ({ developers, users }) => ({

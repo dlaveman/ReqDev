@@ -38,7 +38,8 @@ Object.assign(
 db.didSync = db.createAndSync()
 
 // sync the db, creating it if necessary
-function createAndSync(force = true, retries = 0, maxRetries = 5) {
+
+function createAndSync(force = false, retries = 0, maxRetries = 5) {
   return db
     .sync({ force })
     .then(() => debug(`Synced models to db ${url}`))

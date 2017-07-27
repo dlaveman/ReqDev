@@ -54,4 +54,5 @@ module.exports.associations = (
   Developer.belongsToMany(Category, { through: 'DeveloperCategory' })
   Developer.hasOne(Review)
   Developer.hasOne(Order)
+  Developer.hasMany(Cart);
 }
