@@ -1,10 +1,10 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Navbar, NavItem, Dropdown, Button } from 'react-materialize';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 export default class NavBar extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { value: 0 };
+    super(props)
+    this.state = { value: 0 }
   }
   // handleChange = (event, index, value) => this.setState({ value });
   render() {
@@ -21,6 +21,6 @@ export default class NavBar extends React.Component {
           <NavItem value={1}> category 2 </NavItem>
         </Dropdown>
       </Navbar>
-    );
+    )
   }
 }

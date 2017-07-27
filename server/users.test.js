@@ -1,7 +1,7 @@
-const request = require('supertest')
-    , {expect} = require('chai')
-    , db = require('APP/db')
-    , app = require('./start')
+const request = require('supertest'),
+  { expect } = require('chai'),
+  db = require('APP/db'),
+  app = require('./start')
 
 /* global describe it before afterEach */
 
@@ -12,10 +12,7 @@ describe('/api/users', () => {
   describe('GET /:id', () =>
     describe('when not logged in', () =>
       it('fails with a 401 (Unauthorized)', () =>
-        request(app)
-          .get(`/api/users/1`)
-          .expect(401)
-      )))
+        request(app).get(`/api/users/1`).expect(401))))
 
   describe('POST', () =>
     describe('when not logged in', () => {
@@ -33,11 +30,13 @@ describe('/api/users', () => {
           .post('/api/users')
           .send({
             email: 'eve@interloper.com',
-            password: '23456',
+            password: '23456'
           })
           .redirects(1)
-          .then(res => expect(res.body).to.contain({
-            email: 'eve@interloper.com'
-          })))
+          .then(res =>
+            expect(res.body).to.contain({
+              email: 'eve@interloper.com'
+            })
+          ))
     }))
 })
