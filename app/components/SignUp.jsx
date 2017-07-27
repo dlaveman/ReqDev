@@ -5,7 +5,12 @@ import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
 import { Row, Col, Card, Input, Icon } from 'react-materialize'
 
-class SignUp extends Component {
+export default class SignUp extends Component {
+  constructor(props) {
+    super(props)
+    this.onSignupSubmit = this.onSignupSubmit.bind(this)
+  }
+
   render() {
     return (
       <Row>
@@ -29,6 +34,16 @@ class SignUp extends Component {
       </Row>
     )
   }
-}
 
-export default connect(state => ({}), { login })(SignUp)
+  onSignupSubmit(event) {
+    event.preventDefault()
+    const credentials = {
+      email: event.target.email.value,
+      password: event.target.password.value,
+    }
+  }
+}
+// const mapState = () => ({ message: 'Sign up' })
+// const mapDispatch = { signup: {} }
+
+// export default connect(mapState, mapDispatch)(Signup)
