@@ -1,26 +1,69 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Navbar, NavItem, Dropdown, Button } from 'react-materialize'
-export default class NavBar extends React.Component {
+import { fetchCategories } from '../reducers'
+import { connect } from 'react-redux'
+
+class NavBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = { value: 0 }
+  }
+  componentDidMount() {
+    console.log(this.props)
+    this.props.fetchCategories();
   }
   // handleChange = (event, index, value) => this.setState({ value });
   render() {
     return (
       <Navbar brand="require('dev')" right>
-        <NavItem href={<NavLink to="/login" />}>Login</NavItem>
-        <NavItem href={<NavLink to="/signup" />}>Sign up </NavItem>
+        <NavLink to="/login">
+          <NavItem>Login</NavItem>
+        </NavLink>
+        <NavLink to="/signup">
+          <NavItem>Sign up </NavItem>
+        </NavLink>
         <Dropdown
           trigger={<Button>Choose a Category</Button>}
           value={this.state.value}
           onChange={this.handleChange}
-        >
-          <NavItem value={0}> category 1 </NavItem>
-          <NavItem value={1}> category 2 </NavItem>
+        >{this.props.categories.map(category => {
+          return (
+            <NavLink to={`/categories/${category.id}`}>
+            <NavItem value={category.id} key={category.id}> {category.name}</NavItem>
+            </NavLink>
+          )
+        })}
         </Dropdown>
       </Navbar>
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchCategories: () => {
+      dispatch(fetchCategories());
+    }
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+// const mapStateToProps = (state) => {
+//   return {
+//     categories: state.categories
+//   }
+// }
+// const mapDispatchToProps = (dispatch)=>{
+//   return{
+//     fetchCategories:()=>{
+//       dispatch(fetchCategories());
+//     }
+//   }
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
