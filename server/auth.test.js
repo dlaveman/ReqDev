@@ -6,7 +6,8 @@ const app = require('./start')
 
 const alice = {
   username: 'alice@secrets.org',
-  password: '12345'
+  password: '12345',
+  name: "Alice"
 }
 
 /* global describe it before afterEach beforeEach */
@@ -17,7 +18,8 @@ describe('/api/auth', () => {
   beforeEach('create a user', () =>
     User.create({
       email: alice.username,
-      password: alice.password
+      password: alice.password,
+      name: "Alice"
     })
   )
 

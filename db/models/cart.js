@@ -15,6 +15,6 @@ module.exports = db =>
     }
   );
 
-module.exports.associations = (Cart, { Developer }) => {
-  Cart.belongsTo(Developer);
-};
+// module.exports.associations = (Cart, { Developer }) => {
+//   Cart.belongsTo(Developer);
+// };
