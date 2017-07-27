@@ -16,9 +16,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-// material-ui uses react-tap-event-plugin
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 import store from './store';
 import Jokes from './components/Jokes';
@@ -28,17 +25,13 @@ import NotFound from './components/NotFound';
 import NavBar from './components/NavBar';
 import Categories from './components/Categories';
 import Home from './components/Home';
-import SignUp from './components/SignUp';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth
 }))(({ user, children }) =>
   <Router>
     <div>
-      <MuiThemeProvider>
-        <NavBar />
-      </MuiThemeProvider>
+      <NavBar />
       {/*<nav>
         {user ? <WhoAmI/> : <Login/>}
       </nav>*/}
@@ -46,7 +39,6 @@ const ExampleApp = connect(({ auth }) => ({
         <Switch>
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>
