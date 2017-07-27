@@ -10,16 +10,12 @@ export default class NavBar extends React.Component {
   render() {
     return (
       <Navbar brand="require('dev')" right>
-        <NavItem href={<NavLink to="/login" />}>Login</NavItem>
-        <NavItem href={<NavLink to="/signup" />}>Sign up </NavItem>
-        <Dropdown
-          trigger={<Button>Choose a Category</Button>}
-          value={this.state.value}
-          onChange={this.handleChange}
-        >
-          <NavItem value={0}> category 1 </NavItem>
-          <NavItem value={1}> category 2 </NavItem>
-        </Dropdown>
+        <NavLink to="/signup">
+          <NavItem>Sign up</NavItem>
+        </NavLink>
+        <NavLink to="/login">
+          <NavItem>Log In</NavItem>
+        </NavLink>
       </Navbar>
     )
   }
