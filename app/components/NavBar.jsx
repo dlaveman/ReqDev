@@ -11,7 +11,7 @@ class NavBar extends React.Component {
   }
   componentDidMount() {
     console.log(this.props)
-    this.props.fetchCategories();
+    this.props.fetchCategories()
   }
   // handleChange = (event, index, value) => this.setState({ value });
   render() {
@@ -27,33 +27,35 @@ class NavBar extends React.Component {
           trigger={<Button>Choose a Category</Button>}
           value={this.state.value}
           onChange={this.handleChange}
-        >{this.props.categories.map(category => {
-          return (
-            <NavLink to={`/categories/${category.id}`}>
-            <NavItem value={category.id} key={category.id}> {category.name}</NavItem>
-            </NavLink>
-          )
-        })}
+        >
+          {this.props.categories.map(category => {
+            return (
+              <NavLink to={`/categories/${category.id}`}>
+                <NavItem value={category.id} key={category.id}>
+                  {' '}{category.name}
+                </NavItem>
+              </NavLink>
+            )
+          })}
         </Dropdown>
       </Navbar>
     )
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    categories: state.categories
-  };
-};
-const mapDispatchToProps = (dispatch) => {
+    categories: state.categories,
+  }
+}
+const mapDispatchToProps = dispatch => {
   return {
     fetchCategories: () => {
-      dispatch(fetchCategories());
-    }
-  };
-};
+      dispatch(fetchCategories())
+    },
+  }
+}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 // const mapStateToProps = (state) => {
 //   return {
 //     categories: state.categories
