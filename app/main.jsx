@@ -16,6 +16,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import history from './history'
 
 import store from './store'
 import Jokes from './components/Jokes'
@@ -31,18 +32,15 @@ import 'APP/public/index.css'
 const ExampleApp = connect(({ auth }) => ({
   user: auth,
 }))(({ user, children }) =>
-  <Router>
+  <Router history={history}>
     <div>
       <NavBar />
-      {/*<nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>*/}
       <main>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={SignUp} />
           <Route component={NotFound} />
         </Switch>
       </main>
@@ -51,9 +49,7 @@ const ExampleApp = connect(({ auth }) => ({
 )
 render(
   <Provider store={store}>
-    <Router>
-      <ExampleApp />
-    </Router>
+    <ExampleApp />
   </Provider>,
   document.getElementById('main'),
 )
