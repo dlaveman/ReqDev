@@ -30,9 +30,9 @@ class NavBar extends React.Component {
         >
           {this.props.categories.map(category => {
             return (
-              <NavLink to={`/categories/${category.id}`}>
+              <NavLink to={`/api/developer?category=${category.name}`}>
                 <NavItem value={category.id} key={category.id}>
-                  {' '}{category.name}
+                  {category.name}
                 </NavItem>
               </NavLink>
             )
