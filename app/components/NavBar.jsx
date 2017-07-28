@@ -39,7 +39,7 @@ class NavBar extends React.Component {
               {this.props.categories.map(category => {
                 return (
                   <li key={category.id}>
-                    <NavLink to={`/categories/${category.id}`}>
+                    <NavLink to={`/api/developer?category=${category.name}`}>
                       {category.name}
                     </NavLink>
                   </li>
@@ -66,16 +66,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
-// const mapStateToProps = (state) => {
-//   return {
-//     categories: state.categories
-//   }
-// }
-// const mapDispatchToProps = (dispatch)=>{
-//   return{
-//     fetchCategories:()=>{
-//       dispatch(fetchCategories());
-//     }
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
