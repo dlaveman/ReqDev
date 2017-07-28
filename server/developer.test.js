@@ -5,7 +5,7 @@ const app = require('./start')
 
 const louie = {
   email: 'louie@secrets.org',
-  name: "Louie",
+  name: 'Louie',
   rate: 50
 }
 
@@ -17,21 +17,21 @@ describe('/api/developer', () => {
   beforeEach('create a developer', () =>
     Developer.create({
       email: 'louie@secrets.org',
-      name: "Louie",
+      name: 'Louie',
       rate: 50,
       id: 9999
     })
   )
 
-  describe('GET /developer/:id', () => {
-    describe('when getting a developer/:id', () =>
-      it ('responds with the developer', () => {
-        return request(app).get('/api/developer/9999')
-          .expect(200)
-          .then(res => expect(res.body).to.contain({
-            name: "Louie"
-          }))
-      }
-      ))
-    })
-  })
+  // describe('GET /developer/:id', () => {
+  //   describe('when getting a developer/:id', () =>
+  //     it('responds with the developer', () => {
+  //       return request(app).get('/api/developer/9999')
+  //         .expect(200)
+  //         .then(res => expect(res.body).to.contain({
+  //           name: 'Louie'
+  //         }))
+  //     })
+  //   )
+  // })
+})
