@@ -29,32 +29,26 @@ class NavBar extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
         >
-          {this.props.categories.map(category => {
-            return (
+          {this.props.categories.map(category => (
               <NavLink to={`/api/developer?category=${category.name}`}>
                 <NavItem value={category.id} key={category.id}>
                   {category.name}
                 </NavItem>
               </NavLink>
-            )
-          })}
+            ))}
         </Dropdown>
       </Navbar>
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    categories: state.categories,
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchCategories: () => {
-      dispatch(fetchCategories())
-    },
-  }
-}
+const mapStateToProps = state => ({
+  categories: state.categories,
+})
+const mapDispatchToProps = dispatch => ({
+  fetchCategories: () => {
+    dispatch(fetchCategories())
+  },
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
 // const mapStateToProps = (state) => {

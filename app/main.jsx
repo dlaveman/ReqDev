@@ -26,6 +26,7 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
+import Cart from './components/Cart'
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth,
@@ -33,14 +34,15 @@ const ExampleApp = connect(({ auth }) => ({
   <Router>
     <div>
       <NavBar />
-      {/*<nav>
+      {/* <nav>
         {user ? <WhoAmI/> : <Login/>}
-      </nav>*/}
+      </nav> */}
       <main>
         <Switch>
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/cart" component={Cart}/>
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>
