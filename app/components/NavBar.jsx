@@ -1,8 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Navbar, NavItem, Dropdown, Button } from 'react-materialize'
+import { Row, Col, Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
+import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -16,31 +17,37 @@ class NavBar extends React.Component {
   render() {
     return (
       <Navbar brand="require('dev')" right>
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-        <li>
-          <NavLink to="/signup">Sign up</NavLink>
-        </li>
-        <li>
-          <Dropdown
-            trigger={
-              <li>
-                Browse<i className="material-icons right">arrow_drop_down</i>
-              </li>
-            }
-          >
-            {this.props.categories.map(category => {
-              return (
+        <div className="col s8">
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/signup">Sign up</NavLink>
+          </li>
+          <li>
+            <Dropdown
+              trigger={
                 <li>
-                  <NavLink to={`/categories/${category.id}`}>
-                    {category.name}
+                  <NavLink to="#!">
+                    Browse<i className="material-icons right">
+                      arrow_drop_down
+                    </i>
                   </NavLink>
                 </li>
-              )
-            })}
-          </Dropdown>
-        </li>
+              }
+            >
+              {this.props.categories.map(category => {
+                return (
+                  <li key={category.id}>
+                    <NavLink to={`/categories/${category.id}`}>
+                      {category.name}
+                    </NavLink>
+                  </li>
+                )
+              })}
+            </Dropdown>
+          </li>
+        </div>
       </Navbar>
     )
   }
