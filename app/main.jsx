@@ -26,6 +26,7 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
+import 'APP/public/index.css'
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth,
