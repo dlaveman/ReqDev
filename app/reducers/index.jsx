@@ -9,4 +9,4 @@ const rootReducer = combineReducers({
 
 export * from './categories';
 
-export default rootReducer;
+export default rootReducer

@@ -51,8 +51,8 @@ module.exports = db =>
 module.exports.associations = (User, { Order, Cart, OAuth, Review }) => {
   User.hasOne(OAuth)
   User.hasOne(Cart)
-  User.hasOne(Order)
-  User.hasOne(Review)
+  User.hasMany(Order)
+  User.hasMany(Review)
 }
 
 function setEmailAndPassword(user) {

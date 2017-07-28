@@ -49,10 +49,10 @@ module.exports = db =>
 
 module.exports.associations = (
   Developer,
-  { Order, Cart, Category, Review },
+  { Order, Cart, Category, Review, OrderItem},
 ) => {
   Developer.belongsToMany(Category, { through: 'DeveloperCategory' })
   Developer.hasOne(Review)
-  Developer.hasOne(Order)
-  Developer.hasMany(Cart);
+  Developer.hasMany(OrderItem)
+  Developer.hasMany(Cart)
 }

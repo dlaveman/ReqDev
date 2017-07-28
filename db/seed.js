@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db'),
-  { User, Favorite, Developer, Category, Cart, Order, Review, Promise } = db,
+  { User, Favorite, Developer, Category, Cart, Order, OrderItem, Review, Promise } = db,
   { mapValues } = require('lodash'),
   DeveloperCategory = db.model('DeveloperCategory')
 
@@ -15,6 +15,7 @@ function seedEverything() {
   seeded.devCat = devCat(seeded)
   seeded.carts = carts(seeded)
   seeded.orders = orders(seeded)
+  seeded.orderItems = orderItems(seeded)
   seeded.reviews = reviews(seeded)
 
   return Promise.props(seeded)
@@ -54,9 +55,52 @@ const developers = seed(Developer, {
 const categories = seed(Category, {
   WebDev: { name: 'Web Developer' },
   MobileDev: { name: 'Mobile Developer' },
-
   GameDev: { name: 'Game Developer' },
 })
+
+const orders = seed(Order, ({users}) => ({
+  Order1: {
+    submit_time: '2017-07-27 18:30:00',
+    user_id: users.god.id,
+  },
+  Order2: {
+    submit_time: '2017-07-27 19:30:00',
+    user_id: users.barack.id,
+  }
+}))
+
+const orderItems = seed(OrderItem, ({developers, orders}) => ({
+  Ordr1a: {
+    developer_id: developers.Joe.id,
+    rate: developers.Joe.rate,
+    hours: 5,
+    order_id: orders.Order1.id
+  },
+  Ordr1b: {
+    developer_id: developers.Jane.id,
+    rate: developers.Jane.rate,
+    hours: 4,
+    order_id: orders.Order1.id
+  },
+  Ordr2a: {
+    developer_id: developers.Joe.id,
+    rate: developers.Joe.rate,
+    hours: 10,
+    order_id: orders.Order2.id
+  },
+  Ordr2b: {
+    developer_id: developers.Boris.id,
+    rate: developers.Boris.rate,
+    hours: 5,
+    order_id: orders.Order2.id
+  },
+  Ordr2c: {
+    developer_id: developers.Jane.id,
+    rate: developers.Jane.rate,
+    hours: 5,
+    order_id: orders.Order2.id
+  },
+}))
 
 const devCat = seed(DeveloperCategory, ({ developers, categories }) => ({
   'Joe loves Web': {
@@ -112,43 +156,6 @@ const carts = seed(Cart, ({ developers, users }) => ({
     hours: 12,
   },
 }))
-const orders = seed(Order, ({ developers, users }) => ({
-  OrdrA1: {
-    developer_id: developers.Joe.id,
-    rate: developers.Joe.rate,
-    user_id: users.god.id,
-    hours: 5,
-    orderId: 1234,
-  },
-  OrdrA2: {
-    developer_id: developers.Jane.id,
-    rate: developers.Jane.rate,
-    user_id: users.god.id,
-    hours: 4,
-    orderId: 1234,
-  },
-  OrdrB1: {
-    developer_id: developers.Joe.id,
-    rate: developers.Joe.rate,
-    user_id: users.barack.id,
-    hours: 10,
-    orderId: 1235,
-  },
-  OrdrB2: {
-    developer_id: developers.Boris.id,
-    rate: developers.Boris.rate,
-    user_id: users.barack.id,
-    hours: 5,
-    orderId: 1235,
-  },
-  OrdrB3: {
-    developer_id: developers.Jane.id,
-    rate: developers.Jane.rate,
-    user_id: users.barack.id,
-    hours: 5,
-    orderId: 1235,
-  },
-}))
 
 const reviews = seed(Review, ({ developers, users }) => ({
   'Review Joe': {
@@ -189,16 +196,6 @@ class BadRow extends Error {
   }
 }
 
-// seed(Model: Sequelize.Model, rows: Function|Object) ->
-//   (others?: {...Function|Object}) -> Promise<Seeded>
-//
-// Takes a model and either an Object describing rows to insert,
-// or a function that when called, returns rows to insert. returns
-// a function that will seed the DB when called and resolve with
-// a Promise of the object of all seeded rows.
-//
-// The function form can be used to initialize rows that reference
-// other models.
 function seed(Model, rows) {
   return (others = {}) => {
     if (typeof rows === 'function') {
@@ -243,5 +240,4 @@ function seed(Model, rows) {
   }
 }
 
-//module.exports = Object.assign(seed, { users, things, favorites });
 module.exports = Object.assign(seed, { users, devCat })
