@@ -13,32 +13,45 @@ class NavBar extends React.Component {
     console.log(this.props)
     this.props.fetchCategories()
   }
-  // handleChange = (event, index, value) => this.setState({ value });
   render() {
     return (
-      <Navbar brand="require('dev')" right>
-        <NavLink to="/login">
-          <NavItem>Login</NavItem>
-        </NavLink>
-        <NavLink to="/signup">
-          <NavItem>Sign up </NavItem>
-        </NavLink>
-        <Dropdown
-          trigger={<Button>Choose a Category</Button>}
-          value={this.state.value}
-          onChange={this.handleChange}
-        >
+      <div>
+        <ul id="dropdown1" className="dropdown-content">
           {this.props.categories.map(category => {
             return (
-              <NavLink to={`/categories/${category.id}`}>
-                <NavItem value={category.id} key={category.id}>
-                  {' '}{category.name}
-                </NavItem>
-              </NavLink>
+              <li>
+                <NavLink to={`/categories/${category.id}`}>
+                  {category.name}
+                </NavLink>
+              </li>
             )
           })}
-        </Dropdown>
-      </Navbar>
+        </ul>
+        <nav>
+          <div className="nav-wrapper">
+            <a href="/" className="brand-logo">
+              require('dev')
+            </a>
+            <ul className="right hide-on-med-and-down">
+              <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+              </li>
+              <li>
+                <a
+                  className="dropdown-button"
+                  href="#!"
+                  data-activates="dropdown1"
+                >
+                  Browse<i className="material-icons right">arrow_drop_down</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     )
   }
 }
