@@ -1,7 +1,4 @@
 .nav-wrapper {
-  background-color: black;
-}
-
-.container {
   width: 70%;
+  margin: 0 auto;
 }
