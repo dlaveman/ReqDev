@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
+import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
   constructor(props) {
