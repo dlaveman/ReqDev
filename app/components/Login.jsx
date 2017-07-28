@@ -1,8 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { Row, Col, CardPanel, Input, Icon } from 'react-materialize'
 
-export const Login = ({ login, message }) =>
+export const Login = ({ login }) =>
   <Row>
     <Col s={12} m={6} className="grid-example">
       <CardPanel title="Log In">
@@ -24,12 +23,9 @@ export const Login = ({ login, message }) =>
 import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
 
-export default withRouter(
-  connect(
-    state => ({
-      user: auth.state,
-      message: 'Log in',
-    }),
-    { login },
-  )(Login),
-)
+export default connect(
+  state => ({
+    message: 'Log in',
+  }),
+  { login },
+)(Login)
