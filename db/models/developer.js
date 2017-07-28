@@ -26,7 +26,7 @@ module.exports = db =>
         type: ARRAY(STRING),
         defaultValue: [],
         set: function(skills) {
-          skills = skills || []
+          skills = skills.trim() || []
           if (typeof skills === 'string') {
             skills = skills.split(',').map(str => str.trim())
           }
@@ -49,10 +49,10 @@ module.exports = db =>
 
 module.exports.associations = (
   Developer,
-  { Order, Cart, Category, Review },
+  { Order, Cart, Category, Review, OrderItem},
 ) => {
   Developer.belongsToMany(Category, { through: 'DeveloperCategory' })
-  Developer.hasOne(Review)
-  Developer.hasOne(Order)
-  Developer.hasMany(Cart);
+  Developer.hasMany(Review)
+  Developer.hasMany(OrderItem)
+  Developer.hasMany(Cart)
 }
