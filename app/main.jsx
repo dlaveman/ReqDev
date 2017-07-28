@@ -42,7 +42,7 @@ const ExampleApp = connect(({ auth }) => ({
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route path='/developers?category=:categoryName' component={Developers} />
+          <Route path='/developers' component={Developers} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>

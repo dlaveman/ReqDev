@@ -1,21 +1,40 @@
 import React, { component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCategory } from '../reducers'
+import { NavLink, withRouter } from 'react-router-dom'
+import { fetchDevelopers, fetchCategories } from '../reducers'
 
-export default class Category extends React.Component {
+class Category extends React.Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
-    console.log('props', this.props)
-    this.props.fetchCategory()
+    const query = this.props.location.search.slice(10)
+    const categoryName = query.replace(/(%20)/g, ' ')
+    this.props.fetchDevelopers(categoryName)
   }
 
   render() {
     console.log('props', this.props)
     return (
-
-      <h1>Category</h1>
+      <div>
+        {this.props.developers && this.props.developers.map(developer => {
+          return (
+            <li key={developer.id}>
+                {developer.name}
+            </li>
+          )
+        })}
+      </div>
     )
   }
 }
+
+const mapStateToProps = function(state) {
+  return {
+    developers: state.developers
+  }
+}
+
+const mapDispatchToProps = { fetchDevelopers }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Category))
