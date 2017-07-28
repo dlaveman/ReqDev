@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
-import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -16,43 +15,33 @@ class NavBar extends React.Component {
   }
   render() {
     return (
-      <div>
-        <ul id="dropdown1" className="dropdown-content">
-          {this.props.categories.map(category => {
-            return (
+      <Navbar brand="require('dev')" right>
+        <li>
+          <NavLink to="/login">Login</NavLink>
+        </li>
+        <li>
+          <NavLink to="/signup">Sign up</NavLink>
+        </li>
+        <li>
+          <Dropdown
+            trigger={
               <li>
-                <NavLink to={`/categories/${category.id}`}>
-                  {category.name}
-                </NavLink>
+                Browse<i className="material-icons right">arrow_drop_down</i>
               </li>
-            )
-          })}
-        </ul>
-        <nav>
-          <div className="nav-wrapper">
-            <a href="/" className="brand-logo">
-              require('dev')
-            </a>
-            <ul className="right hide-on-med-and-down">
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </li>
-              <li>
-                <a
-                  className="dropdown-button"
-                  href="#!"
-                  data-activates="dropdown1"
-                >
-                  Browse<i className="material-icons right">arrow_drop_down</i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+            }
+          >
+            {this.props.categories.map(category => {
+              return (
+                <li>
+                  <NavLink to={`/categories/${category.id}`}>
+                    {category.name}
+                  </NavLink>
+                </li>
+              )
+            })}
+          </Dropdown>
+        </li>
+      </Navbar>
     )
   }
 }
