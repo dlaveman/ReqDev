@@ -4,9 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { fetchDevelopers, fetchCategories } from '../reducers'
 
 class Developers extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     const query = this.props.location.search.slice(10)
     const categoryName = query.replace(/(%20)/g, ' ')
