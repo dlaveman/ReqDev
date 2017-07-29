@@ -8,9 +8,9 @@ import 'APP/public/navbar.css'
 class NavBar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { value: 0 }
   }
   componentDidMount() {
+    console.log('navbar component')
     this.props.fetchCategories()
   }
 
@@ -24,7 +24,6 @@ class NavBar extends React.Component {
           <li>
             <NavLink to="/signup">Sign up</NavLink>
           </li>
-          <li>
             <Dropdown
               trigger={
                 <li>
@@ -46,7 +45,6 @@ class NavBar extends React.Component {
                 )
               })}
             </Dropdown>
-          </li>
         </div>
       </Navbar>
     )
