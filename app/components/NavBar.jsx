@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { Row, Col, Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
@@ -8,12 +8,12 @@ import 'APP/public/navbar.css'
 class NavBar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { value: 0 }
   }
   componentDidMount() {
-    console.log(this.props)
+    console.log('navbar component')
     this.props.fetchCategories()
   }
+
   render() {
     return (
       <Navbar brand="require('dev')" right>
@@ -24,7 +24,6 @@ class NavBar extends React.Component {
           <li>
             <NavLink to="/signup">Sign up</NavLink>
           </li>
-          <li>
             <Dropdown
               trigger={
                 <li>
@@ -38,13 +37,12 @@ class NavBar extends React.Component {
             >
               {this.props.categories.map(category => (
                   <li key={category.id}>
-                    <NavLink to={`/api/developer?category=${category.name}`}>
+                    <NavLink to={`/developers?category=${category.name}`}>
                       {category.name}
                     </NavLink>
                   </li>
                 ))}
             </Dropdown>
-          </li>
         </div>
       </Navbar>
     )
@@ -59,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
