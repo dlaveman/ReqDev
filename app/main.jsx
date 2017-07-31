@@ -14,7 +14,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+  Redirect
 } from 'react-router-dom'
 
 import store from './store'
@@ -29,32 +29,28 @@ import SignUp from './components/SignUp'
 import Developers from './components/Developers'
 
 const ExampleApp = connect(({ auth }) => ({
-  user: auth,
+  user: auth
 }))(({ user, children }) =>
   <Router>
     <div>
       <NavBar />
-      {/*<nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav>*/}
       <main>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
-          <Route path='/developers' component={Developers} />
+          <Route path="/developers" component={Developers} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>
       </main>
     </div>
-  </Router>,
+  </Router>
 )
 render(
   <Provider store={store}>
-    <Router>
-      <ExampleApp />
-    </Router>
+    <ExampleApp />
   </Provider>,
-  document.getElementById('main'),
+  document.getElementById('main')
 )
