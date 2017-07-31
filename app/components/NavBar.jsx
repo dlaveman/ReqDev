@@ -6,14 +6,11 @@ import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { value: 0 }
-  }
   componentDidMount() {
-    console.log(this.props)
+    console.log('navbar component')
     this.props.fetchCategories()
   }
+
   render() {
     return (
       <Navbar brand="require('dev')" right>
@@ -40,7 +37,7 @@ class NavBar extends React.Component {
             {this.props.categories.map(category => {
               return (
                 <li key={category.id}>
-                  <NavLink to={`/api/developer?category=${category.name}`}>
+                  <NavLink to={`/developers?category=${category.name}`}>
                     {category.name}
                   </NavLink>
                 </li>
