@@ -31,17 +31,29 @@ class Cart extends Component {
         <div className="row list-group">
           {
             this.props.cart.map(cartItem => (
-              <div>{console.log(cartItem)}
-                 <img src={cartItem.developer.photo} />
-                <h3>Developer Name: <NavLink to={`/developers/${cartItem.developer_id}`}>{cartItem.developer.name}                                                                       </NavLink>
-                  <Button floating className="red" type="submit" value={cartItem.id} onClick={this.props.handleClick}>x</Button>
-                </h3>
-                <h5>Developer Cost: ${cartItem.developer.rate}/hr x {cartItem.hours} hours = <b>${cartItem.developer.rate * cartItem.hours}</b>
-                <Button floating className="blue" type="submit" value={[cartItem.id, cartItem.hours]} onClick={this.handlePlusButton}>+</Button><Button floating className="blue" type="submit" value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton}>-</Button></h5>
-
+              cartItem.developer &&
+              <div>
+                <img src={cartItem.developer.photo} />
+                  <h3>Developer Name:
+                    <NavLink to={`/developers/${cartItem.developer_id}`}>
+                      {cartItem.developer.name}
+                    </NavLink>
+                    <Button floating className="red" type="submit"
+                      value={cartItem.id} onClick={this.props.handleClick}>x
+                    </Button>
+                  </h3>
+                  <h5>Developer Cost:
+                    ${cartItem.developer.rate}/hr x {cartItem.hours}
+                    hours = <b>${cartItem.developer.rate * cartItem.hours}</b>
+                    <Button floating className="blue" type="submit"
+                      value={[cartItem.id, cartItem.hours]} onClick={this.handlePlusButton}>+
+                    </Button>
+                    <Button floating className="blue" type="submit"
+                      value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton}>-
+                    </Button>
+                  </h5>
               </div>
-            )
-            )
+            ))
           }
         </div>
         <hr />
