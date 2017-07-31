@@ -4,27 +4,40 @@ import { Row, Col, Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
+import { logout } from 'APP/app/reducers/auth'
 
 class NavBar extends React.Component {
   componentDidMount() {
-    console.log('navbar component')
     this.props.fetchCategories()
+  }
+
+  renderLoginSignup() {
+    return [
+      <li key={1}>
+        <NavLink to="/login">Login</NavLink>
+      </li>,
+      <li key={2}>
+        <NavLink to="/signup">Sign up</NavLink>
+      </li>
+    ]
+  }
+
+  renderLogout() {
+    return [
+      <li key={1}>
+        Hello, {this.props.user.name} !
+      </li>,
+      <NavItem key={2} onClick={this.props.logout}>
+        Logout
+      </NavItem>
+    ]
   }
 
   render() {
     return (
       <Navbar brand="require('dev')" right>
         <div className="col s8">
-          {this.props.user
-            ? <li>
-                <NavLink to="/logout">Logout</NavLink>
-              </li>
-            : <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>}
-          <li>
-            <NavLink to="/signup">Sign up</NavLink>
-          </li>
+          {this.props.user ? this.renderLogout() : this.renderLoginSignup()}
           <Dropdown
             trigger={
               <li>
@@ -47,14 +60,18 @@ class NavBar extends React.Component {
     )
   }
 }
+
 const mapStateToProps = state => ({
-  categories: state.categories,
-  user: state.auth
-})
+    categories: state.categories,
+    user: state.auth
+  })
 const mapDispatchToProps = dispatch => ({
-  fetchCategories: () => {
-    dispatch(fetchCategories())
-  }
-})
+    fetchCategories: () => {
+      dispatch(fetchCategories())
+    },
+    logout: () => {
+      dispatch(logout())
+    }
+  })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

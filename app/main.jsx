@@ -27,6 +27,7 @@ import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
 import Cart from './components/Cart'
+import Developer from './components/Developer'
 import Developers from './components/Developers'
 
 const ExampleApp = connect(({ auth }) => ({
@@ -44,6 +45,7 @@ const ExampleApp = connect(({ auth }) => ({
           <Route path="/cart" component={Cart}/>
           <Route path='/developers' component={Developers} />
           <Route exact path="/" component={Home} />
+          <Route path="/developers/:id" component={Developer} />
           <Route component={NotFound} />
         </Switch>
       </main>
