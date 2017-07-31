@@ -5,7 +5,7 @@ import categories from './categories'
 import cart from './cart'
 import developers from './developers'
 const rootReducer = combineReducers({
-	auth, categories, cart,developers
+	auth, categories, cart, developers
 });
 
 export * from './categories'

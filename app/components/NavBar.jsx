@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     console.log('navbar component')
     this.props.fetchCategories()
@@ -18,31 +15,33 @@ class NavBar extends React.Component {
     return (
       <Navbar brand="require('dev')" right>
         <div className="col s8">
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+          {this.props.user
+            ? <li>
+                <NavLink to="/logout">Logout</NavLink>
+              </li>
+            : <li>
+                <NavLink to="/login">Login</NavLink>
+              </li>}
           <li>
             <NavLink to="/signup">Sign up</NavLink>
           </li>
-            <Dropdown
-              trigger={
-                <li>
-                  <NavLink to="#!">
-                    Browse<i className="material-icons right">
-                      arrow_drop_down
-                    </i>
+          <Dropdown
+            trigger={
+              <li>
+                <NavLink to="#!">
+                  Browse<i className="material-icons right">arrow_drop_down</i>
+                </NavLink>
+              </li>
+            }
+          >
+            {this.props.categories.map(category => (
+                <li key={category.id}>
+                  <NavLink to={`/developers?category=${category.name}`}>
+                    {category.name}
                   </NavLink>
                 </li>
-              }
-            >
-              {this.props.categories.map(category => (
-                  <li key={category.id}>
-                    <NavLink to={`/developers?category=${category.name}`}>
-                      {category.name}
-                    </NavLink>
-                  </li>
-                ))}
-            </Dropdown>
+              ))}
+          </Dropdown>
         </div>
       </Navbar>
     )
@@ -50,11 +49,12 @@ class NavBar extends React.Component {
 }
 const mapStateToProps = state => ({
   categories: state.categories,
+  user: state.auth
 })
 const mapDispatchToProps = dispatch => ({
   fetchCategories: () => {
     dispatch(fetchCategories())
-  },
+  }
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

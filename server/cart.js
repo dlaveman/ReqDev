@@ -2,13 +2,19 @@
 
 const db = require('APP/db')
 const Cart = db.model('carts')
+const Devloper = db.model('developer')
 
 module.exports = require('express').Router()
 // Need passport working for changing userId to req.user.id
   .get('/', (req, res, next) =>
-    Cart.findAll({ where: { user_id: 1 } })
+    Cart.findAll({include: [{
+      model: Devloper,
+      where: {
+        id: 1
+      }
+    }]})
       .then(carts => res.json(carts))
-      .catch(next))
+      .catch(next)
   .post('/', (req, res, next) =>
     Cart.create(req.body)
       .then(cart => res.status(201).json(cart))
