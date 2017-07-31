@@ -26,6 +26,7 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
+import Developer from './components/Developer'
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth,
@@ -42,6 +43,7 @@ const ExampleApp = connect(({ auth }) => ({
           <Route path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/" component={Home} />
+          <Route exact path="/developer" component={Developer} />
           <Route component={NotFound} />
         </Switch>
       </main>
