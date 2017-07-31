@@ -14,7 +14,6 @@ class Developer extends React.Component {
 
   handleAddToCart = (evt) => {
     evt.preventDefault()
-    console.log('handleATC', this.props.history)
     this.props.postCart(this.props.user.id, this.props.developers.id, evt.target.hours.value, this.props.history)
   }
 
