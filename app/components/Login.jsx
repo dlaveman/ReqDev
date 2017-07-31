@@ -1,5 +1,7 @@
 import React from 'react'
 import { Row, Col, CardPanel, Input, Icon } from 'react-materialize'
+import { login } from 'APP/app/reducers/auth'
+import { connect } from 'react-redux'
 
 export const Login = ({ login, history }) =>
   <Row>
@@ -20,12 +22,5 @@ export const Login = ({ login, history }) =>
       </CardPanel>
     </Col>
   </Row>
-import { login } from 'APP/app/reducers/auth'
-import { connect } from 'react-redux'
 
-export default connect(
-  state => ({
-    message: 'Log in'
-  }),
-  { login }
-)(Login)
+export default connect(null, { login })(Login)
