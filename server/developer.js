@@ -5,6 +5,7 @@ const Developer = db.model('developers')
 const Category = db.model('categories')
 
 module.exports = require('express').Router()
+
   .get('/', (req, res, next) =>
     Category.findOne({
       where: { name: req.query.category },
@@ -14,7 +15,13 @@ module.exports = require('express').Router()
     })
       .then(category => { res.json(category.developers) })
       .catch(next))
+
   .post('/', (req, res, next) =>
     Developer.create(req.body)
       .then(developer => res.status(201).json(developer))
+      .catch(next))
+
+  .get('/:devId', (req, res, next) =>
+    Developer.findById(req.params.devId)
+      .then(dev => res.json(dev))
       .catch(next))
