@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUserCart, fetchDeveloperById } from '../reducers'
+import { fetchUserCart, fetchDeveloperById, deleteCartInstance, putCart } from '../reducers'
+import { Button } from 'react-materialize'
+import { NavLink } from 'react-router-dom'
 
 class Cart extends Component {
   componentDidMount() {
     this.props.fetchUserCart()
-    this.props.fetchDeveloperById(1)
   }
   render() {
     console.log(this.props)
@@ -17,7 +18,12 @@ class Cart extends Component {
           {
             this.props.cart.map(cartItem => (
               <div>
-                <h3>{(+cartItem.developer_id)}</h3>
+                <img src={cartItem.developer.photo} />
+                <h3>Developer Name: <NavLink to={`/developers/${cartItem.developer_id}`}>{cartItem.developer.name}      </NavLink>
+                  <Button floating small className="red" type="submit" value={cartItem.id} onClick={this.props.handleClick}>x</Button>
+                </h3>
+                <h5>Developer Cost: ${cartItem.developer.rate}/hr x {cartItem.hours} hours = <b>${cartItem.developer.rate * cartItem.hours}</b>     <Button floating small className="blue" icon='add' type="submit" value={cartItem.id} onClick={this.props.handleEdit}/><Button floating small className="blue" icon='remove' type="submit" value={cartItem.id} onClick={this.props.handleEdit}/></h5>
+
               </div>
             )
             )
@@ -38,6 +44,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchDeveloperById: () => {
     dispatch(fetchDeveloperById())
+  },
+  handleClick(evt) {
+    evt.preventDefault()
+    dispatch(deleteCartInstance(+evt.target.value))
+  },
+  handleEdit(evt) {
+    evt.preventDefault()
+    dispatch(putCart())
   }
 })
 

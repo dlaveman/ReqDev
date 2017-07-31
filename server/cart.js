@@ -1,20 +1,20 @@
 'use strict'
 
 const db = require('APP/db')
+const User = db.model('users')
 const Cart = db.model('carts')
-const Devloper = db.model('developer')
+const Developer = db.model('developers')
 
 module.exports = require('express').Router()
-// Need passport working for changing userId to req.user.id
   .get('/', (req, res, next) =>
-    Cart.findAll({include: [{
-      model: Devloper,
-      where: {
-        id: 1
-      }
-    }]})
+    Cart.findAll({
+      where: {user_id: req.user.id},
+      include: [{
+        model: Developer
+      }]
+    })
       .then(carts => res.json(carts))
-      .catch(next)
+      .catch(next))
   .post('/', (req, res, next) =>
     Cart.create(req.body)
       .then(cart => res.status(201).json(cart))
