@@ -31,7 +31,6 @@ export const postCart = (user_id, developer_id, hours, history) => dispatch => {
   axios.post(`/api/cart`, cart)
     .then(res => { dispatch(addToCart(res.data)) })
     .then(() => {
-      console.log('postCart history', history)
       history.push('/cart')
     })
     .catch(err => console.error(`addToCart cart: ${cart} unsuccessful`, err))
@@ -45,10 +44,8 @@ export default function cartReducer(state = [], action) {
     return state.filter(cart => cart.id !== action.id)
   case UPDATE_CART:
     return state.map(cart => (
-      action.cart.Cart.id === cart.id ? action.cart.Cart : cart
-    ))
-  case ADD_TO_CART:
-    return [...state, action.cart]
+        action.cart[1][0].id === cart.id ? action.cart[1][0] : cart
+      ))
   default: return state
   }
 }

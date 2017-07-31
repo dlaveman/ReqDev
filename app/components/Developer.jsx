@@ -6,9 +6,7 @@ import { connect } from 'react-redux'
 import { Col, Row, Input } from 'react-materialize'
 
 class Developer extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+
   componentDidMount() {
     const devId = /.*\/(.*)/.exec(this.props.location.pathname)
     this.props.fetchDeveloper(devId[1]) // parens are 1st el of match arr

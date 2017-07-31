@@ -5,7 +5,21 @@ import { Button } from 'react-materialize'
 import { NavLink } from 'react-router-dom'
 
 class Cart extends Component {
+  constructor() {
+    super()
+    this.handlePlusButton=this.handlePlusButton.bind(this)
+    this.handleMinusButton=this.handleMinusButton.bind(this)
+  }
   componentDidMount() {
+    console.log('mounted')
+    this.props.fetchUserCart()
+  }
+  handlePlusButton(evt) {
+    this.props.handlePlus(evt)
+    this.props.fetchUserCart()
+  }
+  handleMinusButton(evt) {
+    this.props.handleMinus(evt)
     this.props.fetchUserCart()
   }
   render() {
@@ -17,12 +31,13 @@ class Cart extends Component {
         <div className="row list-group">
           {
             this.props.cart.map(cartItem => (
-              <div>
-                <img src={cartItem.developer.photo} />
-                <h3>Developer Name: <NavLink to={`/developers/${cartItem.developer_id}`}>{cartItem.developer.name}      </NavLink>
-                  <Button floating small className="red" type="submit" value={cartItem.id} onClick={this.props.handleClick}>x</Button>
+              <div>{console.log(cartItem)}
+                 <img src={cartItem.developer.photo} />
+                <h3>Developer Name: <NavLink to={`/developers/${cartItem.developer_id}`}>{cartItem.developer.name}                                                                       </NavLink>
+                  <Button floating className="red" type="submit" value={cartItem.id} onClick={this.props.handleClick}>x</Button>
                 </h3>
-                <h5>Developer Cost: ${cartItem.developer.rate}/hr x {cartItem.hours} hours = <b>${cartItem.developer.rate * cartItem.hours}</b>     <Button floating small className="blue" icon='add' type="submit" value={cartItem.id} onClick={this.props.handleEdit}/><Button floating small className="blue" icon='remove' type="submit" value={cartItem.id} onClick={this.props.handleEdit}/></h5>
+                <h5>Developer Cost: ${cartItem.developer.rate}/hr x {cartItem.hours} hours = <b>${cartItem.developer.rate * cartItem.hours}</b>
+                <Button floating className="blue" type="submit" value={[cartItem.id, cartItem.hours]} onClick={this.handlePlusButton}>+</Button><Button floating className="blue" type="submit" value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton}>-</Button></h5>
 
               </div>
             )
@@ -35,8 +50,7 @@ class Cart extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  cart: state.cart,
-  developers: state.developers
+  cart: state.cart
 })
 const mapDispatchToProps = (dispatch) => ({
   fetchUserCart: () => {
@@ -49,9 +63,13 @@ const mapDispatchToProps = (dispatch) => ({
     evt.preventDefault()
     dispatch(deleteCartInstance(+evt.target.value))
   },
-  handleEdit(evt) {
+  handlePlus(evt) {
     evt.preventDefault()
-    dispatch(putCart())
+    dispatch(putCart(+evt.target.value[0], {hours: +evt.target.value[2]+1}))
+  },
+  handleMinus(evt) {
+    evt.preventDefault()
+    dispatch(putCart(+evt.target.value[0], {hours: +evt.target.value[2]-1}))
   }
 })
 
