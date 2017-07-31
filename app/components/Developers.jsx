@@ -28,13 +28,16 @@ class Developers extends React.Component {
         <Row>
           {this.props.developers && this.props.developers.map(developer => {
             return (
-              <Col s={2}>
-                <div key={developer.id}>
+              <Col s={12} m={6} l={3} key={developer.id}>
+                <div>
                   <NavLink to={`/developer/${developer.id}`}>
                     <img src={developer.photo} />
                   </NavLink>
                   <div className='developerName'>
-                    {developer.name}
+                    <h5> {developer.name} </h5>
+                  </div>
+                  <div>
+                    <h5>Skillset: {developer.skills} </h5>
                   </div>
                 </div>
               </Col>
@@ -46,7 +49,7 @@ class Developers extends React.Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
   return {
     developers: state.developers
   }
