@@ -1,31 +1,46 @@
 import React, { component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { Row, Col } from 'react-materialize'
 import { fetchDevelopers, fetchCategories } from '../reducers'
 
 class Developers extends React.Component {
   componentDidMount() {
-    const query = this.props.location.search.slice(10)
-    const categoryName = query.replace(/(%20)/g, ' ')
-    this.props.fetchDevelopers(categoryName)
+    this.parseQueryString()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (this.props.location.search !== nextProps.location.search) {
-      const query = nextProps.location.search.slice(10)
-      const categoryName = query.replace(/(%20)/g, ' ')
-      this.props.fetchDevelopers(categoryName)
+      this.parseQueryString()
     }
+  }
+
+  parseQueryString() {
+    const search = this.props.location.search
+    const params = new URLSearchParams(search)
+    const category = params.get('category')
+    this.props.fetchDevelopers(category)
   }
 
   render() {
     return (
       <div>
-        {this.props.developers && this.props.developers.map(developer => (
-            <li key={developer.id}>
-              {developer.name}
-            </li>
-          ))}
+        <Row>
+          {this.props.developers && this.props.developers.map(developer => {
+            return (
+              <Col s={2}>
+                <div key={developer.id}>
+                  <NavLink to={`/developer/${developer.id}`}>
+                    <img src={developer.photo} />
+                  </NavLink>
+                  <div className='developerName'>
+                    {developer.name}
+                  </div>
+                </div>
+              </Col>
+            )
+          })}
+        </Row>
       </div>
     )
   }
