@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
 import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
-
+// import from 'materialize-social'
 export const Login = ({ login, history }) => {
   return (
     <Row>
