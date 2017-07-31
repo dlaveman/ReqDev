@@ -27,7 +27,7 @@ export const putCart = (id, cart) => dispatch => {
 }
 
 export const postCart = (user_id, developer_id, hours, history) => dispatch => {
-  const cart = {user_id, developer_id, hours}
+  const cart = { user_id, developer_id, hours }
   axios.post(`/api/cart`, cart)
     .then(res => { dispatch(addToCart(res.data)) })
     .then(() => {
