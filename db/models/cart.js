@@ -12,6 +12,7 @@ module.exports = db =>
     },
   })
 
-module.exports.associations = (Cart, { User }) => {
+module.exports.associations = (Cart, { User, Developer }) => {
   Cart.belongsTo(User)
+  Cart.belongsTo(Developer)
 }

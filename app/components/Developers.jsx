@@ -21,19 +21,17 @@ class Developers extends React.Component {
   render() {
     return (
       <div>
-        {this.props.developers && this.props.developers.map(developer => {
-          return (
+        {this.props.developers && this.props.developers.map(developer => (
             <li key={developer.id}>
               {developer.name}
             </li>
-          )
-        })}
+          ))}
       </div>
     )
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   return {
     developers: state.developers
   }

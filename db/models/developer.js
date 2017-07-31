@@ -48,9 +48,7 @@ module.exports = db =>
   )
 
 module.exports.associations = (
-  Developer,
-  { Order, Cart, Category, Review, OrderItem},
-) => {
+  Developer, {Order, Cart, Category, Review, OrderItem}) => {
   Developer.belongsToMany(Category, { through: 'DeveloperCategory' })
   Developer.hasMany(Review)
   Developer.hasMany(OrderItem)
