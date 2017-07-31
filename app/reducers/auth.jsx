@@ -26,6 +26,13 @@ export const logout = () => dispatch =>
     .then(() => dispatch(whoami()))
     .catch(() => dispatch(whoami()))
 
+export const signup = ({ name, email, password }, history) => dispatch =>
+  axios
+    .post('/api/auth/signup/local', { name, email, password })
+    .then(() => dispatch(whoami()))
+    .then(() => history.push('/'))
+    .catch(() => dispatch(whoami()))
+
 export const whoami = () => dispatch =>
   axios
     .get('/api/auth/whoami')
