@@ -26,6 +26,7 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
+import Cart from './components/Cart'
 import Developer from './components/Developer'
 import Developers from './components/Developers'
 
@@ -40,8 +41,9 @@ const ExampleApp = connect(({ auth }) => ({
           <Route exact path="/" component={Home} />
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/developers" component={Developers} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/cart" component={Cart}/>
+          <Route path='/developers' component={Developers} />
           <Route exact path="/" component={Home} />
           <Route path="/developers/:id" component={Developer} />
           <Route component={NotFound} />

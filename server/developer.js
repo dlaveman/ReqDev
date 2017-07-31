@@ -5,7 +5,10 @@ const Developer = db.model('developers')
 const Category = db.model('categories')
 
 module.exports = require('express').Router()
-
+  .get('/:developerId', (req, res, next) =>
+    Developer.findById(req.params.developerId)
+      .then(developer => res.json(developer))
+      .catch(next))
   .get('/', (req, res, next) =>
     Category.findOne({
       where: { name: req.query.category },
