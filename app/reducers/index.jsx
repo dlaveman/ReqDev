@@ -5,7 +5,7 @@ import categories from './categories'
 
 const rootReducer = combineReducers({
   auth,
-  categories,
+  categories
 })
 
 export * from './categories'

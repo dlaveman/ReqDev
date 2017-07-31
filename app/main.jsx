@@ -14,9 +14,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+  Redirect
 } from 'react-router-dom'
-import history from './history'
 
 import store from './store'
 import Jokes from './components/Jokes'
@@ -27,12 +26,11 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
-import 'APP/public/index.css'
 
 const ExampleApp = connect(({ auth }) => ({
-  user: auth,
+  user: auth
 }))(({ user, children }) =>
-  <Router history={history}>
+  <Router>
     <div>
       <NavBar />
       <main>
@@ -45,11 +43,11 @@ const ExampleApp = connect(({ auth }) => ({
         </Switch>
       </main>
     </div>
-  </Router>,
+  </Router>
 )
 render(
   <Provider store={store}>
     <ExampleApp />
   </Provider>,
-  document.getElementById('main'),
+  document.getElementById('main')
 )
