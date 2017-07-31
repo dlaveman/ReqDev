@@ -4,6 +4,7 @@ import { Row, Col, Navbar, NavItem, Dropdown, Button } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
+import { logout } from 'APP/app/reducers/auth'
 
 class NavBar extends React.Component {
   componentDidMount() {
@@ -26,9 +27,9 @@ class NavBar extends React.Component {
       <li key={1}>
         Hello, {this.props.user.name} !
       </li>,
-      <li key={2}>
-        <NavLink to="/logout">Logout</NavLink>
-      </li>
+      <NavItem key={2} onClick={this.props.logout}>
+        Logout
+      </NavItem>
     ]
   }
 
@@ -72,6 +73,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCategories: () => {
       dispatch(fetchCategories())
+    },
+    logout: () => {
+      dispatch(logout())
     }
   }
 }
