@@ -31,8 +31,9 @@ export default function cartReducer(state = [], action) {
   case REMOVE_CART_INSTANCE:
     return state.filter(cart => cart.id !== action.id)
   case UPDATE_CART:
+    console.log(action.cart[1][0].id)
     return state.map(cart => (
-        action.cart.Cart.id === cart.id ? action.cart.Cart : cart
+        action.cart[1][0].id === cart.id ? action.cart[1][0] : cart
       ))
   default: return state
   }
