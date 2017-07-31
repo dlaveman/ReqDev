@@ -24,6 +24,7 @@ export const SignUp = ({ signup, history }) => {
           >
             <Row>
               <Input
+                autoFocus
                 name="name"
                 offset="m1"
                 className="blue-text"
