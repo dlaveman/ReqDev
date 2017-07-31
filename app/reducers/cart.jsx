@@ -44,7 +44,7 @@ export default function cartReducer(state = [], action) {
     return state.filter(cart => cart.id !== action.id)
   case UPDATE_CART:
     return state.map(cart => (
-      action.cart.Cart.id === cart.id ? action.cart.Cart : cart
+      action.cart[1][0].id === cart.id ? action.cart[1][0] : cart
     ))
   case ADD_TO_CART:
     return [...state, action.cart]
