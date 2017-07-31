@@ -16,7 +16,12 @@ class Developer extends React.Component {
   render() {
     return (
       <div className="links">
-        <h1>Hi, I'm {this.props.developers.name} </h1>
+        <form>
+          <h1>Hi, I'm {this.props.developers.name} </h1>
+          <h3>My rate is {this.props.developers.rate} </h3>
+          <h3>I'm reachable at {this.props.developers.email} </h3>
+          <input type="submit" value="Add To Cart" />
+        </form>
       </div>
     )
   }

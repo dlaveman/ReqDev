@@ -28,7 +28,7 @@ export function fetchDevelopers(categoryName) {
   }
 }
 
-export default function developerReducer(state = [], action) {
+export default function developersReducer(state = [], action) {
   switch (action.type) {
   case GET_DEVELOPER:
     return action.developer

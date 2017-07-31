@@ -47,15 +47,13 @@ class NavBar extends React.Component {
               </li>
             }
           >
-            {this.props.categories.map(category => {
-              return (
+            {this.props.categories.map(category => (
                 <li key={category.id}>
                   <NavLink to={`/developers?category=${category.name}`}>
                     {category.name}
                   </NavLink>
                 </li>
-              )
-            })}
+              ))}
           </Dropdown>
         </div>
       </Navbar>
@@ -63,21 +61,17 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     categories: state.categories,
     user: state.auth
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
+  })
+const mapDispatchToProps = dispatch => ({
     fetchCategories: () => {
       dispatch(fetchCategories())
     },
     logout: () => {
       dispatch(logout())
     }
-  }
-}
+  })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
