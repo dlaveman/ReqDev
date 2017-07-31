@@ -26,11 +26,8 @@ import NavBar from './components/NavBar'
 import Categories from './components/Categories'
 import Home from './components/Home'
 import SignUp from './components/SignUp'
-<<<<<<< HEAD
 import Cart from './components/Cart'
-=======
 import Developers from './components/Developers'
->>>>>>> 6fd594dda481ef3101185a56ec70d5cb1b561edd
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth,
@@ -45,13 +42,9 @@ const ExampleApp = connect(({ auth }) => ({
         <Switch>
           <Route path="/categories" component={Categories} />
           <Route path="/login" component={Login} />
-<<<<<<< HEAD
           <Route path="/signup" component={SignUp} />
           <Route path="/cart" component={Cart}/>
-=======
-          <Route exact path="/signup" component={SignUp} />
           <Route path='/developers' component={Developers} />
->>>>>>> 6fd594dda481ef3101185a56ec70d5cb1b561edd
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>

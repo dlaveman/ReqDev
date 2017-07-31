@@ -1,8 +1,11 @@
 import axios from 'axios'
 
 const GET_DEVELOPERS = 'GET_DEVELOPERS'
+const GET_DEVELOPER = 'GET_DEVELOPER'
 
 export const getDevelopers = developers => ({ type: GET_DEVELOPERS, developers })
+
+export const getDeveloper = developer => ({type: GET_DEVELOPER, developer})
 
 export function fetchDevelopers(categoryName) {
   return function thunk(dispatch) {
@@ -15,10 +18,19 @@ export function fetchDevelopers(categoryName) {
   }
 }
 
+export function fetchDeveloperById(developerId) {
+  return function thunk(dispatch) {
+    return axios.get(`/api/developer/${developerId}`)
+    .then(res => dispatch(getDeveloper(res.data)))
+  }
+}
+
 export default function developersReducer(state = [], action) {
   switch (action.type) {
   case GET_DEVELOPERS:
     return action.developers
+  case GET_DEVELOPER:
+    return action.developer
   default: return state
   }
 }
