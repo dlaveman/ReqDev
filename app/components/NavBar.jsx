@@ -7,24 +7,36 @@ import 'APP/public/navbar.css'
 
 class NavBar extends React.Component {
   componentDidMount() {
-    console.log('navbar component')
     this.props.fetchCategories()
+  }
+
+  renderLoginSignup() {
+    return [
+      <li key={1}>
+        <NavLink to="/login">Login</NavLink>
+      </li>,
+      <li key={2}>
+        <NavLink to="/signup">Sign up</NavLink>
+      </li>
+    ]
+  }
+
+  renderLogout() {
+    return [
+      <li key={1}>
+        Hello, {this.props.user.name} !
+      </li>,
+      <li key={2}>
+        <NavLink to="/logout">Logout</NavLink>
+      </li>
+    ]
   }
 
   render() {
     return (
       <Navbar brand="require('dev')" right>
         <div className="col s8">
-          {this.props.user
-            ? <li>
-                <NavLink to="/logout">Logout</NavLink>
-              </li>
-            : <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>}
-          <li>
-            <NavLink to="/signup">Sign up</NavLink>
-          </li>
+          {this.props.user ? this.renderLogout() : this.renderLoginSignup()}
           <Dropdown
             trigger={
               <li>
@@ -49,6 +61,7 @@ class NavBar extends React.Component {
     )
   }
 }
+
 const mapStateToProps = state => {
   return {
     categories: state.categories,
