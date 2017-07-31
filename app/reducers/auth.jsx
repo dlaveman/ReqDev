@@ -13,10 +13,11 @@ export const authenticated = user => ({
   user
 })
 
-export const login = (username, password) => dispatch =>
+export const login = (username, password, history) => dispatch =>
   axios
     .post('/api/auth/login/local', { username, password })
     .then(() => dispatch(whoami()))
+    .then(() => history.push('/'))
     .catch(() => dispatch(whoami()))
 
 export const logout = () => dispatch =>
