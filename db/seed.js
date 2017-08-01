@@ -35,20 +35,40 @@ const users = seed(User, {
 })
 
 const developers = seed(Developer, {
-  Joe: {
-    name: 'Joe',
-    email: 'joe@gmail.com',
-    rate: 80,
+  Ben: {
+    name: 'Ben',
+    email: 'ben@example.com.com',
+    photo: '/images/ben.png',
+    rate: 85,
   },
-  Jane: {
-    name: 'Jane',
-    email: 'jane@gmail.com',
-    rate: 90,
-  },
-  Boris: {
-    name: 'Boris',
-    email: 'boris@gmail.com',
+  Emily: {
+    name: 'emily',
+    email: 'emily@example.com',
+    photo: '/images/emily.png',
     rate: 100,
+  },
+  Gabe: {
+    name: 'Gabriel',
+    email: 'gabe@example.com',
+    photo: '/images/gabe.png',
+    rate: 85,
+  },
+  Jon: {
+    name: 'Jonathan',
+    email: 'jonathan@example.com',
+    photo: '/images/jon.png',
+    rate: 95,
+  },
+  Natasha: {
+    name: 'Natasha',
+    email: 'natasha@example.com',
+    photo: '/images/natasha.png',
+    rate: 95,
+  },
+  Theo: {
+    name: 'Theo',
+    email: 'theo@example.com',
+    rate: 90,
   },
 })
 
@@ -71,83 +91,83 @@ const orders = seed(Order, ({users}) => ({
 
 const orderItems = seed(OrderItem, ({developers, orders}) => ({
   Ordr1a: {
-    developer_id: developers.Joe.id,
-    rate: developers.Joe.rate,
+    developer_id: developers.Ben.id,
+    rate: developers.Ben.rate,
     hours: 5,
     order_id: orders.Order1.id
   },
   Ordr1b: {
-    developer_id: developers.Jane.id,
-    rate: developers.Jane.rate,
+    developer_id: developers.Emily.id,
+    rate: developers.Emily.rate,
     hours: 4,
     order_id: orders.Order1.id
   },
   Ordr2a: {
-    developer_id: developers.Joe.id,
-    rate: developers.Joe.rate,
+    developer_id: developers.Ben.id,
+    rate: developers.Ben.rate,
     hours: 10,
     order_id: orders.Order2.id
   },
   Ordr2b: {
-    developer_id: developers.Boris.id,
-    rate: developers.Boris.rate,
+    developer_id: developers.Gabe.id,
+    rate: developers.Gabe.rate,
     hours: 5,
     order_id: orders.Order2.id
   },
   Ordr2c: {
-    developer_id: developers.Jane.id,
-    rate: developers.Jane.rate,
+    developer_id: developers.Emily.id,
+    rate: developers.Emily.rate,
     hours: 5,
     order_id: orders.Order2.id
   },
 }))
 
 const devCat = seed(DeveloperCategory, ({ developers, categories }) => ({
-  'Joe loves Web': {
-    developer_id: developers.Joe.id,
+  'Ben loves Web': {
+    developer_id: developers.Ben.id,
     category_id: categories.WebDev.id,
   },
-  'Joe loves Mobile': {
-    developer_id: developers.Joe.id,
+  'Emily loves Mobile': {
+    developer_id: developers.Emily.id,
     category_id: categories.MobileDev.id,
   },
-  'Jane loves Web': {
-    developer_id: developers.Jane.id,
+  'Emily loves Web': {
+    developer_id: developers.Emily.id,
     category_id: categories.WebDev.id,
   },
-  'Joe loves Games': {
-    developer_id: developers.Jane.id,
+  'Gabe loves Games': {
+    developer_id: developers.Gabe.id,
     category_id: categories.GameDev.id,
   },
-  'Boris loves Mobile': {
-    developer_id: developers.Boris.id,
+  'Jon loves Mobile': {
+    developer_id: developers.Jon.id,
     category_id: categories.MobileDev.id,
   },
 }))
 
 const carts = seed(Cart, ({ developers, users }) => ({
   CartA1: {
-    developer_id: developers.Joe.id,
+    developer_id: developers.Ben.id,
     user_id: users.god.id,
     hours: 5,
   },
   CartA2: {
-    developer_id: developers.Jane.id,
+    developer_id: developers.Emily.id,
     user_id: users.god.id,
     hours: 4,
   },
   CartB1: {
-    developer_id: developers.Joe.id,
+    developer_id: developers.Ben.id,
     user_id: users.barack.id,
     hours: 10,
   },
   CartB2: {
-    developer_id: developers.Boris.id,
+    developer_id: developers.Gabe.id,
     user_id: users.barack.id,
     hours: 5,
   },
   CartB3: {
-    developer_id: developers.Jane.id,
+    developer_id: developers.Emily.id,
     user_id: users.barack.id,
     hours: 5,
   },
@@ -159,13 +179,13 @@ const carts = seed(Cart, ({ developers, users }) => ({
 
 const reviews = seed(Review, ({ developers, users }) => ({
   'Review Joe': {
-    developer_id: developers.Joe.id,
+    developer_id: developers.Ben.id,
     user_id: users.god.id,
     comment: 'Joe is awesome',
     rating: 5,
   },
   'Review Jane': {
-    developer_id: developers.Jane.id,
+    developer_id: developers.Emily.id,
     user_id: users.god.id,
     comment: 'Jane is amazing',
     rating: 5,

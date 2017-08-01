@@ -14,6 +14,11 @@ class Cart extends Component {
   handleMinusButton=(evt) => {
     this.props.handleMinus(evt)
   }
+  handleSubmitOrder=(evt) => {
+    evt.preventDefault()
+    console.log('Submitting Order')
+  }
+
   render() {
     return (
       <div className="container">
@@ -24,7 +29,7 @@ class Cart extends Component {
             this.props.cart.map((cartItem, i) => (
               cartItem.developer &&
               <div key={i}>
-                <img src={cartItem.developer.photo} />
+                <img src={cartItem.developer.photo} height='100px' />
                   <h3>Developer Name:
                     <NavLink to={`/developers/${cartItem.developer_id}`}>
                       {cartItem.developer.name}
@@ -48,6 +53,9 @@ class Cart extends Component {
           }
         </div>
         <hr />
+        <Button className="blue" type="submit"
+            value='dummy' onClick={this.handleSubmitOrder} disabled={!this.props.cart.length}>Submit Order
+        </Button>
       </div>
     )
   }
