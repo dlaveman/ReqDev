@@ -13,7 +13,12 @@ class Developer extends React.Component {
 
   handleAddToCart = (evt) => {
     evt.preventDefault()
-    this.props.postCart(this.props.user.id, this.props.developer.id, evt.target.hours.value, this.props.history)
+    const cart = {
+      user_id: this.props.user.id,
+      developer_id: this.props.developer.id,
+      hours: evt.target.hours.value
+    }
+    this.props.postCart(cart, this.props.history)
   }
 
   render() {
@@ -44,8 +49,8 @@ const mapDispatchToProps = dispatch => {
     fetchDeveloper: (developerId) => {
       dispatch(fetchDeveloper(developerId)) // hardcoding
     },
-    postCart: (userId, developerId, hours, history) => {
-      dispatch(postCart(userId, developerId, hours, history))
+    postCart: (cart, history) => {
+      dispatch(postCart(cart, history))
     }
   }
 }

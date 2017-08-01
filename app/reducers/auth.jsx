@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const reducer = (state = null, action) => {
   switch (action.type) {
     case AUTHENTICATED:
@@ -26,12 +27,14 @@ export const logout = () => dispatch =>
     .then(() => dispatch(whoami()))
     .catch(() => dispatch(whoami()))
 
-export const signup = ({ name, email, password }, history) => dispatch =>
+export const signup = ({ name, email, password }, history) => dispatch => {
+  console.log('axios', name, email, password)
   axios
     .post('/api/auth/signup/local', { name, email, password })
     .then(() => dispatch(whoami()))
     .then(() => history.push('/'))
     .catch(() => dispatch(whoami()))
+}
 
 export const whoami = () => dispatch =>
   axios

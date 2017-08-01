@@ -2,28 +2,24 @@ import React, { Component } from 'react'
 import 'APP/public/signup.css'
 
 // name, email, photo, password
-import { connect } from 'react-redux'
 import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
-import { signup } from 'APP/app/reducers/auth'
 
-export const SignUp = ({ signup, history }) => {
+export default function SignUp({
+  name,
+  email,
+  password,
+  handleInput,
+  validateInput,
+  handleSubmit
+}) {
   return (
     <Row>
       <Col offset="m2 l4" s={12} m={8} l={4} className="grid-example blue-text">
         <Card className="blue-text" textClassName="blue-text" title="Sign Up">
-          <form
-            onSubmit={evt => {
-              evt.preventDefault()
-              const credentials = {
-                email: evt.target.email.value,
-                password: evt.target.password.value,
-                name: evt.target.name.value
-              }
-              signup(credentials, history)
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <Row>
               <Input
+                autoFocus
                 name="name"
                 offset="m1"
                 className="blue-text"
@@ -31,6 +27,8 @@ export const SignUp = ({ signup, history }) => {
                 m={10}
                 label="Name"
                 validate
+                value={name}
+                onChange={handleInput}
               >
                 <Icon className="blue-text">account_circle</Icon>
               </Input>
@@ -39,14 +37,16 @@ export const SignUp = ({ signup, history }) => {
               <Input
                 name="email"
                 offset="m1"
+                id="email"
                 s={12}
                 m={10}
                 className="blue-text"
                 label="Email"
-                data-error="wrong"
-                data-success="right"
+                id="email"
                 validate
+                value={email}
                 type="email"
+                onChange={handleInput}
               >
                 <Icon className="blue-text">email</Icon>
               </Input>
@@ -54,19 +54,26 @@ export const SignUp = ({ signup, history }) => {
             <Row>
               <Input
                 name="password"
+                id="password"
                 offset="m1"
                 className="blue-text"
                 type="password"
                 label="password"
+                value={password}
                 s={12}
                 m={10}
+                onChange={handleInput}
               >
                 <Icon className="blue-text">vpn_key</Icon>
               </Input>
             </Row>
             <Row>
               <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button waves="light" className="blue white-text">
+                <Button
+                  disabled={!validateInput}
+                  waves="light"
+                  className="blue white-text"
+                >
                   Sign Up<Icon left className="white-text">
                     create
                   </Icon>
@@ -79,4 +86,3 @@ export const SignUp = ({ signup, history }) => {
     </Row>
   )
 }
-export default connect(null, { signup })(SignUp)

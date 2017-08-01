@@ -26,8 +26,7 @@ export const putCart = (id, cart) => dispatch => {
     .catch(err => console.error(`Updating cart: ${cart} unsuccessful`, err))
 }
 
-export const postCart = (user_id, developer_id, hours, history) => dispatch => {
-  const cart = {user_id, developer_id, hours}
+export const postCart = (cart, history) => dispatch => {
   axios.post(`/api/cart`, cart)
     .then(res => { dispatch(addToCart(res.data)) })
     .then(() => {
@@ -43,9 +42,11 @@ export default function cartReducer(state = [], action) {
   case REMOVE_CART_INSTANCE:
     return state.filter(cart => cart.id !== action.id)
   case UPDATE_CART:
-    return state.map(cart => (
-        action.cart[1][0].id === cart.id ? action.cart[1][0] : cart
-      ))
+    return state.map(cart => {
+      return action.cart.id === cart.id ? action.cart : cart
+    })
+  case ADD_TO_CART:
+    return [...state, action.cart]
   default: return state
   }
 }
