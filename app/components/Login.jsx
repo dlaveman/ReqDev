@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
-// import from 'materialize-social'
+import 'APP/node_modules/materialize-social/materialize-social.css'
+
 export default function Login({
   email,
   password,
@@ -58,33 +59,34 @@ export default function Login({
               </Col>
             </Row>
             <hr />
+            <br />
             <Row>
-              <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button waves="light" className="blue white-text">
-                  Log In<Icon left className="white-text">
-                    done
-                  </Icon>
-                </Button>
+              <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
+                <a className="waves-effect waves-light btn-large social github">
+                  <i className="fa fa-github" /> Sign in with github
+                </a>
               </Col>
             </Row>
             <hr />
+            <br />
             <Row>
-              <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button waves="light" className="blue white-text">
-                  Log In<Icon left className="white-text">
-                    done
-                  </Icon>
-                </Button>
+              <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
+                <a className="waves-effect waves-light btn-large social facebook">
+                  <i className="fa fa-facebook" /> Sign in with facebook
+                </a>
               </Col>
             </Row>
             <hr />
+            <br />
             <Row>
-              <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button waves="light" className="blue white-text">
-                  Log In<Icon left className="white-text">
-                    done
-                  </Icon>
-                </Button>
+              <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
+                <a
+                  className="waves-effect waves-light btn-large social google"
+                  target="_self"
+                  href="/api/auth/login/google"
+                >
+                  <i className="fa fa-google" /> Sign in with google
+                </a>
               </Col>
             </Row>
           </form>
