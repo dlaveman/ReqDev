@@ -11,28 +11,24 @@ class Cart extends Component {
     this.handleMinusButton=this.handleMinusButton.bind(this)
   }
   componentDidMount() {
-    console.log('mounted')
     this.props.fetchUserCart()
   }
   handlePlusButton(evt) {
     this.props.handlePlus(evt)
-    this.props.fetchUserCart()
   }
   handleMinusButton(evt) {
     this.props.handleMinus(evt)
-    this.props.fetchUserCart()
   }
   render() {
-    console.log(this.props)
     return (
       <div className="container">
         <h1 className="text-center">Cart</h1>
         <hr />
         <div className="row list-group">
           {
-            this.props.cart.map(cartItem => (
+            this.props.cart.map((cartItem, i) => (
               cartItem.developer &&
-              <div>
+              <div key={i}>
                 <img src={cartItem.developer.photo} />
                   <h3>Developer Name:
                     <NavLink to={`/developers/${cartItem.developer_id}`}>
@@ -49,7 +45,7 @@ class Cart extends Component {
                       value={[cartItem.id, cartItem.hours]} onClick={this.handlePlusButton}>+
                     </Button>
                     <Button floating className="blue" type="submit"
-                      value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton}>-
+                      value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton} disabled={cartItem.hours < 1}>-
                     </Button>
                   </h5>
               </div>
