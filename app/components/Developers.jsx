@@ -31,7 +31,7 @@ class Developers extends React.Component {
               <Col s={12} m={6} l={3} key={developer.id}>
                 <div>
                   <NavLink to={`/developers/${developer.id}`}>
-                    <img src={developer.photo} />
+                    <img src={developer.photo} height="300px"/>
                   </NavLink>
                   <div className='developerName'>
                     <h5> {developer.name} </h5>
