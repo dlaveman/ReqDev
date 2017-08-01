@@ -13,14 +13,14 @@ class OrderItem extends Component {
     let price=0
     return (
       <div className="container">
-        <h1 className="text-center">Items in Cart:</h1>
+        <h1 className="text-center">Here's What You Ordered:</h1>
          <hr />
         <div className="row list-group">
           {
             this.props.orderItems.map((orderItem, i) => (
               orderItem.developer &&
               <div key={i}>
-                <img src={orderItem.developer.photo} />
+                <img src={orderItem.developer.photo} height='200px'/>
                   <h3>Developer Name:
                     <NavLink to={`/developers/${orderItem.developer_id}`}>
                       {orderItem.developer.name}

@@ -32,9 +32,19 @@ module.exports = require('express').Router()
       .catch(next))
 // Pass in object with submit time, cart[]
   .post('/', (req, res, next) =>
-    Order.create(req.body.submitTime)
-      .then(order => { console.log(order); OrderItem.bulkCreate(req.body.cart) })
-      .then(orderItem => { console.log(orderItem); res.status(201).json(orderItem) })
+    Order.create(
+      req.body.submitTime
+    )
+      .then(order => {
+        req.body.cart.forEach(item => item.order_id = order.dataValues.id)
+        console.log('Order.create cart----', req.body.cart)
+        //order.dataValues.id
+        OrderItem.bulkCreate(req.body.cart)
+      })
+      .then(orderItem => {
+        //console.log('orderItem======', orderItem)
+        res.status(201).json(orderItem)
+      })
       .catch(next))
 
   // .put('/:orderId', (req, res, next) =>

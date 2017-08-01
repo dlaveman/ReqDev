@@ -17,7 +17,22 @@ class Cart extends Component {
   handleSubmitOrder=(evt) => {
     evt.preventDefault()
     this.props.cart.map(cart => console.log(cart))
-    this.props.handleSubmit({submitTime: {submit_time: Date.now(), user_id: this.props.auth.id}, cart: this.props.cart})
+    const bulkCart = []
+    this.props.cart.forEach((item) => {
+      bulkCart.push({
+        developer_id: item.developer.id,
+        hours: item.hours,
+        rate: item.developer.rate,
+        order_id: 0
+      })
+    })
+    this.props.handleSubmit({
+      submitTime: {
+        submit_time: Date.now(),
+        user_id: this.props.auth.id
+      },
+      cart: bulkCart
+    })
   }
 
   render() {
