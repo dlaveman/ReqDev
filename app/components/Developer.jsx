@@ -25,6 +25,7 @@ class Developer extends React.Component {
     return (
       <div className='links'>
         <form onSubmit={this.handleAddToCart}>
+          <img src={this.props.developer.photo} height="300px"/>
           <h1>Hi, I'm {this.props.developer.name} </h1>
           <h3>My rate is ${this.props.developer.rate} </h3>
           <h3>I'm reachable at {this.props.developer.email} </h3>
