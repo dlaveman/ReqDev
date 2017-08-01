@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-import { Row, Col, Navbar, NavItem, Dropdown, Button } from 'react-materialize'
+import { Row, Col, Navbar, NavItem, Dropdown, Button, Icon } from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
@@ -55,6 +55,7 @@ class NavBar extends React.Component {
                 </li>
               ))}
           </Dropdown>
+          <NavLink to='/cart'><Icon>shopping_cart</Icon></NavLink>
         </div>
       </Navbar>
     )
