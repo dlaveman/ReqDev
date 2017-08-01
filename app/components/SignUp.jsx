@@ -2,26 +2,21 @@ import React, { Component } from 'react'
 import 'APP/public/signup.css'
 
 // name, email, photo, password
-import { connect } from 'react-redux'
 import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
-import { signup } from 'APP/app/reducers/auth'
 
-export default function SignUp(props) {
+export default function SignUp({
+  name,
+  email,
+  password,
+  handleInput,
+  validateInput,
+  handleSubmit
+}) {
   return (
     <Row>
       <Col offset="m2 l4" s={12} m={8} l={4} className="grid-example blue-text">
         <Card className="blue-text" textClassName="blue-text" title="Sign Up">
-          <form
-            onSubmit={evt => {
-              evt.preventDefault()
-              const credentials = {
-                email: evt.target.email.value,
-                password: evt.target.password.value,
-                name: evt.target.name.value
-              }
-              signup(credentials)
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <Row>
               <Input
                 autoFocus
@@ -32,8 +27,8 @@ export default function SignUp(props) {
                 m={10}
                 label="Name"
                 validate
-                value={props.name}
-                onChange={props.handleInput}
+                value={name}
+                onChange={handleInput}
               >
                 <Icon className="blue-text">account_circle</Icon>
               </Input>
@@ -48,11 +43,10 @@ export default function SignUp(props) {
                 className="blue-text"
                 label="Email"
                 id="email"
-                data-error="wrong"
-                data-success="right"
                 validate
+                value={email}
                 type="email"
-                onChange={props.handleInput}
+                onChange={handleInput}
               >
                 <Icon className="blue-text">email</Icon>
               </Input>
@@ -65,9 +59,10 @@ export default function SignUp(props) {
                 className="blue-text"
                 type="password"
                 label="password"
+                value={password}
                 s={12}
                 m={10}
-                onChange={props.handleInput}
+                onChange={handleInput}
               >
                 <Icon className="blue-text">vpn_key</Icon>
               </Input>
@@ -75,7 +70,7 @@ export default function SignUp(props) {
             <Row>
               <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
                 <Button
-                  disabled={!props.validateInput}
+                  disabled={!validateInput}
                   waves="light"
                   className="blue white-text"
                 >

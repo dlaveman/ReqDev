@@ -20,14 +20,14 @@ module.exports = db => {
       tokenSecret: STRING,
 
       // The whole profile as JSON
-      profileJson: JSON,
+      profileJson: JSON
     },
     {
       // Further reading on indexes:
       // 1. Sequelize and indexes: http://docs.sequelizejs.com/en/2.0/docs/models-definition/#indexes
       // 2. Postgres documentation: https://www.postgresql.org/docs/9.1/static/indexes.html
-      indexes: [{ fields: ['uid'], unique: true }],
-    },
+      indexes: [{ fields: ['uid'], unique: true }]
+    }
   )
 
   // OAuth.V2 is a default argument for the OAuth.setupStrategy method - it's our callback function that will execute when the user has successfully logged in
@@ -35,8 +35,8 @@ module.exports = db => {
     OAuth.findOrCreate({
       where: {
         provider: profile.provider,
-        uid: profile.id,
-      },
+        uid: profile.id
+      }
     })
       .spread(oauth => {
         debug(profile)
@@ -44,7 +44,7 @@ module.exports = db => {
           'provider:%s will log in user:{name=%s uid=%s}',
           profile.provider,
           profile.displayName,
-          profile.id,
+          profile.id
         )
         oauth.profileJson = profile
         oauth.accessToken = accessToken
@@ -54,7 +54,7 @@ module.exports = db => {
         return db.Promise.props({
           oauth,
           user: oauth.getUser(),
-          _saveProfile: oauth.save(),
+          _saveProfile: oauth.save()
         })
       })
       .then(
@@ -62,15 +62,15 @@ module.exports = db => {
           user ||
           OAuth.User
             .create({
-              name: profile.displayName,
+              name: profile.displayName
             })
             .then(user =>
               db.Promise.props({
                 user,
-                _setOauthUser: oauth.setUser(user),
-              }),
+                _setOauthUser: oauth.setUser(user)
+              })
             )
-            .then(({ user }) => user),
+            .then(({ user }) => user)
       )
       .then(user => done(null, user))
       .catch(done)
@@ -81,8 +81,9 @@ module.exports = db => {
     strategy,
     config,
     oauth = OAuth.V2,
-    passport,
+    passport
   }) => {
+    console.log(config)
     const undefinedKeys = Object.keys(config)
       .map(k => config[k])
       .filter(value => typeof value === 'undefined')
