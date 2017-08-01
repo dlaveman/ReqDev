@@ -13,5 +13,6 @@ const rootReducer = combineReducers({
 export * from './categories'
 export * from './cart'
 export * from './developers'
+export * from './developer'
 
 export default rootReducer
