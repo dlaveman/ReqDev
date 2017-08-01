@@ -24,7 +24,7 @@ module.exports = require('express').Router()
       .then(developer => res.status(201).json(developer))
       .catch(next))
 
-  .get('/:devId', (req, res, next) =>
-    Developer.findById(req.params.devId)
-      .then(dev => res.json(dev))
-      .catch(next))
+  // .get('/:devId', (req, res, next) =>
+  //   Developer.findById(req.params.devId)
+  //     .then(dev => res.json(dev))
+  //     .catch(next))
