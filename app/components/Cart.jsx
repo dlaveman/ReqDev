@@ -5,18 +5,13 @@ import { Button } from 'react-materialize'
 import { NavLink } from 'react-router-dom'
 
 class Cart extends Component {
-  constructor() {
-    super()
-    this.handlePlusButton=this.handlePlusButton.bind(this)
-    this.handleMinusButton=this.handleMinusButton.bind(this)
-  }
   componentDidMount() {
     this.props.fetchUserCart()
   }
-  handlePlusButton(evt) {
+  handlePlusButton=(evt) => {
     this.props.handlePlus(evt)
   }
-  handleMinusButton(evt) {
+  handleMinusButton=(evt) => {
     this.props.handleMinus(evt)
   }
   render() {

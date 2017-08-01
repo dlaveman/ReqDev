@@ -1,3 +1,7 @@
 body {
   margin: 24px;
 }
+.hiddentotal{
+  opacity: 0.0;
+  display:none
+}
