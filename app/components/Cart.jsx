@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchUserCart, fetchDeveloperById, deleteCartInstance, putCart } from '../reducers'
+import { fetchUserCart, fetchDeveloperById, deleteCartInstance, putCart, postOrders, whoami, deleteCart } from '../reducers'
 import { Button } from 'react-materialize'
 import { NavLink } from 'react-router-dom'
 
@@ -16,10 +16,14 @@ class Cart extends Component {
   }
   handleSubmitOrder=(evt) => {
     evt.preventDefault()
-    console.log('Submitting Order')
+    this.props.cart.map(cart => console.log(cart))
+    this.props.handleSubmit({submitTime: {submit_time: Date.now(), user_id: this.props.auth.id}, cart: this.props.cart})
   }
 
   render() {
+    let price=0
+    const str =''
+    console.log(this.props)
     return (
       <div className="container">
         <h1 className="text-center">Cart</h1>
@@ -48,20 +52,23 @@ class Cart extends Component {
                       value={[cartItem.id, cartItem.hours]} onClick={this.handleMinusButton} disabled={cartItem.hours < 1}>-
                     </Button>
                   </h5>
+                  <div className="hiddentotal">{price+=cartItem.developer.rate * cartItem.hours}</div>
               </div>
             ))
           }
         </div>
         <hr />
-        <Button className="blue" type="submit"
-            value='dummy' onClick={this.handleSubmitOrder} disabled={!this.props.cart.length}>Submit Order
+        <h3>Total cart price: ${price}</h3>
+        <hr />
+        <Button className="blue" type="submit" onClick={this.handleSubmitOrder} disabled={!this.props.cart.length}>Submit Order
         </Button>
       </div>
     )
   }
 }
 const mapStateToProps = (state) => ({
-  cart: state.cart
+  cart: state.cart,
+  auth: state.auth
 })
 const mapDispatchToProps = (dispatch) => ({
   fetchUserCart: () => {
@@ -69,6 +76,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchDeveloperById: () => {
     dispatch(fetchDeveloperById())
+  },
+  whoami: () => {
+    dispatch(whoami())
   },
   handleClick(evt) {
     evt.preventDefault()
@@ -81,6 +91,11 @@ const mapDispatchToProps = (dispatch) => ({
   handleMinus(evt) {
     evt.preventDefault()
     dispatch(putCart(+evt.target.value[0], {hours: +evt.target.value[2]-1}))
+  },
+  handleSubmit(props) {
+    console.log(props)
+    dispatch(postOrders(props))
+    dispatch(deleteCart())
   }
 })
 

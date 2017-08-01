@@ -33,8 +33,8 @@ module.exports = require('express').Router()
 // Pass in object with submit time, cart[]
   .post('/', (req, res, next) =>
     Order.create(req.body.submitTime)
-      .then(order => OrderItem.bulkCreate(req.body.cart))
-      .then(orderItem => res.status(201).json(orderItem))
+      .then(order => { console.log(order); OrderItem.bulkCreate(req.body.cart) })
+      .then(orderItem => { console.log(orderItem); res.status(201).json(orderItem) })
       .catch(next))
 
   // .put('/:orderId', (req, res, next) =>
