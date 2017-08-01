@@ -19,7 +19,7 @@ import {
 
 import store from './store'
 import Jokes from './components/Jokes'
-import Login from './components/Login'
+import LoginContainer from './components/LoginContainer'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import NavBar from './components/NavBar'
@@ -40,7 +40,7 @@ const ExampleApp = connect(({ auth }) => ({
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/categories" component={Categories} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={LoginContainer} />
           <Route path="/signup" component={SignUpContainer} />
           <Route path="/cart" component={Cart} />
           <Route path="/developers" component={Developers} />

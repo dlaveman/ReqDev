@@ -125,6 +125,7 @@ passport.use(
 auth.get('/whoami', (req, res) => res.send(req.user))
 
 auth.post('/signup/local', (req, res, next) => {
+  console.log(req.body.email, req.body.name, req.body.password)
   User.findOrCreate({
     where: {
       email: req.body.email
