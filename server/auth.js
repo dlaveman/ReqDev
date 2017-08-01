@@ -6,7 +6,7 @@ const passport = require('passport')
 const { User, OAuth } = require('APP/db')
 const auth = require('express').Router()
 
-require('../secret')
+if (process.env.NODE_ENV !== 'production') require('../secret')
 
 /*************************
  * Auth strategies
