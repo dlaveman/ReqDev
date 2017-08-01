@@ -49,7 +49,7 @@ class Developers extends React.Component {
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   return {
     developers: state.developers
   }
