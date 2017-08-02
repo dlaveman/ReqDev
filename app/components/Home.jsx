@@ -9,9 +9,7 @@ import Developer from './Developer'
 const Home = props => {
   return (
     <div>
-      <Row><Col offset="l2">
-        <MediaBox src="/images/reqdev.png" alt="reqdev" width="1050"/>
-      </Col></Row>
+      <MediaBox src="/images/reqdev.png" alt="reqdev" width="1050" />
     </div>
   )
 }
