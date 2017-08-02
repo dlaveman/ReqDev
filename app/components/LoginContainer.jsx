@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { login } from 'APP/app/reducers/auth'
+import { login, whoami } from 'APP/app/reducers/auth'
 import Login from './Login'
 
 export class LoginContainer extends Component {
@@ -8,7 +8,8 @@ export class LoginContainer extends Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     }
   }
 
@@ -24,11 +25,19 @@ export class LoginContainer extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    this.props.login(
-      evt.target.email.value,
-      evt.target.password.value,
-      this.props.history
-    )
+    this.setState({ isLoading: true })
+
+    this.props
+      .login(
+        evt.target.email.value,
+        evt.target.password.value,
+        this.props.history
+      )
+      .catch(e => {
+        alert(e)
+        this.props.whoami()
+        this.setState({ isLoading: false })
+      })
   }
 
   render() {
@@ -39,9 +48,10 @@ export class LoginContainer extends Component {
         password={this.state.password}
         validateInput={this.validateInput()}
         handleSubmit={this.handleSubmit}
+        isLoading={this.state.isLoading}
       />
     )
   }
 }
 
-export default connect(null, { login })(LoginContainer)
+export default connect(null, { login, whoami })(LoginContainer)

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 // name, email, photo, password
 import { connect } from 'react-redux'
 import SignUp from './SignUp'
-import { signup } from 'APP/app/reducers/auth'
+import { signup, whoami } from 'APP/app/reducers/auth'
 
 export class SignUpContainer extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ export class SignUpContainer extends Component {
     this.state = {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      isLoading: false
     }
   }
 
@@ -32,12 +33,17 @@ export class SignUpContainer extends Component {
   }
   handleSubmit = evt => {
     evt.preventDefault()
+    this.setState({ isLoading: true })
     const credentials = {
       email: evt.target.email.value,
       password: evt.target.password.value,
       name: evt.target.name.value
     }
-    this.props.signup(credentials, this.props.history)
+    this.props.signup(credentials, this.props.history).catch(e => {
+      alert(e)
+      this.props.whoami()
+      this.setState({ isLoading: false })
+    })
   }
 
   render() {
@@ -49,8 +55,9 @@ export class SignUpContainer extends Component {
         password={this.state.password}
         validateInput={this.validateInput()}
         handleSubmit={this.handleSubmit}
+        isLoading={this.state.isLoading}
       />
     )
   }
 }
-export default connect(null, { signup })(SignUpContainer)
+export default connect(null, { signup, whoami })(SignUpContainer)
