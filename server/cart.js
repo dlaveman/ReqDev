@@ -26,18 +26,16 @@ module.exports = require('express').Router()
       where: { id: req.params.cartId },
       returning: true
     })
-      .then(res => {
-        return Cart.findOne({
-          where: { id: res[1][0].id },
-          include: [{ model: Developer }],
-        })
-      })
+      .then(res => Cart.findOne({
+        where: { id: res[1][0].id },
+        include: [{ model: Developer }],
+      }))
       .then(cart => { res.json(cart) })
       .catch(next))
 
   .delete('/', (req, res, next) => {
     Cart.destroy({
-      where: { user_id: req.query.user }
+      where: { user_id: req.user.id }
     })
       .catch(next)
   })

@@ -29,11 +29,13 @@ import SignUpContainer from './components/SignUpContainer'
 import Cart from './components/Cart'
 import Developer from './components/Developer'
 import Developers from './components/Developers'
+import Order from './components/Order'
+import OrderItem from './components/OrderItems'
 
 const ExampleApp = connect(({ auth }) => ({
   user: auth
 }))(({ user, children }) =>
-  <Router>
+  <Router >
     <div>
       <NavBar />
       <main>
@@ -45,6 +47,8 @@ const ExampleApp = connect(({ auth }) => ({
           <Route path="/cart" component={Cart} />
           <Route exact path="/developers" component={Developers} />
           <Route path="/developers/:id" component={Developer} />
+          <Route exact path="/orders" component={Order}/>
+          <Route path="/orders/:id" component={OrderItem}/>
           <Route component={NotFound} />
         </Switch>
       </main>
