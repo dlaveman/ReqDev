@@ -13,33 +13,30 @@ const alice = {
 /* global describe it before afterEach */
 
 describe('/api/cart', () => {
-  let idCreated
   const agent = request.agent(app)
   before('Await database sync', () => db.didSync)
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
   beforeEach('create a user and cart', () => {
-    return User.create({
-      email: alice.username,
-      password: alice.password,
-      name: alice.name,
-    })
-    .then((res) => {
-      idCreated = res.id
-      return agent.post('/api/auth/login/local').send(alice)
+    return Cart.create({
+      hours: 4,
+      user: {
+        email: 'alice@secrets.org',
+        name: 'Alice',
+        password: '12345'
+      }
+    }, {
+      include: [ User ]
     })
       .then((res) => {
-        return Cart.create({
-          hours: 4,
-          user_id: idCreated
-        })
+        return agent.post('/api/auth/login/local').send(alice)
       })
       .catch(err => console.log('err', err))
   })
   it('responds with the users cart', () =>
     agent.get('/api/cart/')
-    .expect(200)
-    .then(res => expect(res.body[0]).to.contain({
-      hours: 4
-    }))
+      .expect(200)
+      .then(res => expect(res.body[0]).to.contain({
+        hours: 4
+      }))
   )
 })
