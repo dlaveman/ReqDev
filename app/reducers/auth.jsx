@@ -19,7 +19,6 @@ export const login = (username, password, history) => dispatch =>
     .post('/api/auth/login/local', { username, password })
     .then(() => dispatch(whoami()))
     .then(() => history.push('/'))
-    .catch(() => dispatch(whoami()))
 
 export const logout = () => dispatch =>
   axios
@@ -33,7 +32,6 @@ export const signup = ({ name, email, password }, history) => dispatch => {
     .post('/api/auth/signup/local', { name, email, password })
     .then(() => dispatch(whoami()))
     .then(() => history.push('/'))
-    .catch(() => dispatch(whoami()))
 }
 
 export const whoami = () => dispatch =>
