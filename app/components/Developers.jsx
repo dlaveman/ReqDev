@@ -39,7 +39,7 @@ class Developers extends React.Component {
                     <h5> {developer.name} </h5>
                     <div>
                       <Rating
-                        initialRate={developer.reviews.map(review => {
+                        initialRate={developer.reviews.length && developer.reviews.map(review => {
                           return review.rating
                         })
                         .reduce((a, b) => { return a.concat(b) }, [])
