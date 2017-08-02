@@ -42,7 +42,7 @@ const developers = seed(Developer, {
     rate: 85,
   },
   Emily: {
-    name: 'emily',
+    name: 'Emily',
     email: 'emily@example.com',
     photo: '/images/emily.png',
     rate: 100,

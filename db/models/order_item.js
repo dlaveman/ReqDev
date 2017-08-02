@@ -19,6 +19,7 @@ module.exports = db =>
     },
   })
 
-module.exports.associations = (OrderItem, {Order}) => {
+module.exports.associations = (OrderItem, {Order, Developer}) => {
   OrderItem.belongsTo(Order)
+  OrderItem.belongsTo(Developer)
 }
