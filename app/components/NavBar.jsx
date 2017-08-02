@@ -19,12 +19,16 @@ class NavBar extends React.Component {
     this.props.fetchCategories()
   }
 
+  validateActive(href) {
+    return this.props.location.pathname === href
+  }
+
   renderLoginSignup() {
     return [
-      <li key={1}>
+      <li key={1} className={this.validateActive('/login') ? 'active' : ''}>
         <NavLink to="/login">Login</NavLink>
       </li>,
-      <li key={2}>
+      <li key={2} className={this.validateActive('/signup') ? 'active' : ''}>
         <NavLink to="/signup">Sign up</NavLink>
       </li>
     ]
