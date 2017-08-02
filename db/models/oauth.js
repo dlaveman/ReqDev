@@ -62,7 +62,7 @@ module.exports = db => {
           user ||
           OAuth.User
             .create({
-              name: profile.displayName
+              name: profile.displayName || profile.username
             })
             .then(user =>
               db.Promise.props({
