@@ -9,7 +9,6 @@ class Order extends Component {
     this.props.fetchOrders()
   }
   render() {
-    console.log(this.props)
     return (
       <div className="container">
         <h1 className="text-center">Order History</h1>

@@ -16,7 +16,6 @@ class Cart extends Component {
   }
   handleSubmitOrder=(evt) => {
     evt.preventDefault()
-    this.props.cart.map(cart => console.log(cart))
     const bulkCart = []
     this.props.cart.forEach((item) => {
       bulkCart.push({
@@ -32,13 +31,12 @@ class Cart extends Component {
         user_id: this.props.auth.id
       },
       cart: bulkCart
-    })
+    }, this.props.history)
   }
 
   render() {
     let price=0
     const str =''
-    console.log(this.props)
     return (
       <div className="container">
         <h1 className="text-center">Cart</h1>
@@ -107,10 +105,10 @@ const mapDispatchToProps = (dispatch) => ({
     evt.preventDefault()
     dispatch(putCart(+evt.target.value[0], {hours: +evt.target.value[2]-1}))
   },
-  handleSubmit(props) {
-    console.log(props)
-    dispatch(postOrders(props))
+  handleSubmit(val, history) {
+    dispatch(postOrders(val))
     dispatch(deleteCart())
+    history.push('/orders')
   }
 })
 

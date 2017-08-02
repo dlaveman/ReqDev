@@ -35,7 +35,7 @@ import OrderItem from './components/OrderItems'
 const ExampleApp = connect(({ auth }) => ({
   user: auth
 }))(({ user, children }) =>
-  <Router>
+  <Router >
     <div>
       <NavBar />
       <main>
