@@ -1,6 +1,14 @@
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
-import { Row, Col, Navbar, NavItem, Dropdown, Button, Icon } from 'react-materialize'
+import {
+  Row,
+  Col,
+  Navbar,
+  NavItem,
+  Dropdown,
+  Button,
+  Icon
+} from 'react-materialize'
 import { fetchCategories } from '../reducers'
 import { connect } from 'react-redux'
 import 'APP/public/navbar.css'
@@ -35,7 +43,10 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <Navbar brand="require('dev')" right>
+      <Navbar
+        brand={<img className="brand-jpeg" src="/images/reqdev.jpeg" />}
+        right
+      >
         <div className="col s8">
           {this.props.user ? this.renderLogout() : this.renderLoginSignup()}
           <Dropdown
@@ -47,15 +58,17 @@ class NavBar extends React.Component {
               </li>
             }
           >
-            {this.props.categories.map(category => (
-                <li key={category.id}>
-                  <NavLink to={`/developers?category=${category.name}`}>
-                    {category.name}
-                  </NavLink>
-                </li>
-              ))}
+            {this.props.categories.map(category =>
+              <li key={category.id}>
+                <NavLink to={`/developers?category=${category.name}`}>
+                  {category.name}
+                </NavLink>
+              </li>
+            )}
           </Dropdown>
-          <NavLink to='/cart'><Icon>shopping_cart</Icon></NavLink>
+          <NavLink to="/cart">
+            <Icon>shopping_cart</Icon>
+          </NavLink>
         </div>
       </Navbar>
     )
@@ -63,16 +76,16 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    categories: state.categories,
-    user: state.auth
-  })
+  categories: state.categories,
+  user: state.auth
+})
 const mapDispatchToProps = dispatch => ({
-    fetchCategories: () => {
-      dispatch(fetchCategories())
-    },
-    logout: () => {
-      dispatch(logout())
-    }
-  })
+  fetchCategories: () => {
+    dispatch(fetchCategories())
+  },
+  logout: () => {
+    dispatch(logout())
+  }
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

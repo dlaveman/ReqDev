@@ -1,7 +1,11 @@
 body {
   margin: 24px;
 }
-.hiddentotal{
+.hiddentotal {
   opacity: 0.0;
-  display:none
+  display: none;
+}
+
+.materialboxed.initialized {
+  margin: 5% auto;
 }
