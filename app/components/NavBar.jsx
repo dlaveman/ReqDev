@@ -36,8 +36,8 @@ class NavBar extends React.Component {
 
   renderLogout() {
     return [
-      <li key={1}>
-        Hello, {this.props.user.name} !
+      <li key={1} className="blue-text">
+        Welcome, {this.props.user.name} !
       </li>,
       <NavItem key={2} onClick={this.props.logout}>
         Logout
