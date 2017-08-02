@@ -3,6 +3,7 @@
 const db = require('APP/db')
 const Developer = db.model('developers')
 const Category = db.model('categories')
+const Review = db.model('reviews')
 
 module.exports = require('express').Router()
   .get('/:developerId', (req, res, next) =>
@@ -13,7 +14,11 @@ module.exports = require('express').Router()
     Category.findOne({
       where: { name: req.query.category },
       include: [
-        { model: Developer }
+        { model: Developer,
+          include: [
+            {model: Review}
+          ]
+        }
       ]
     })
       .then(category => { res.json(category.developers) })

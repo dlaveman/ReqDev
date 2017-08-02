@@ -9,7 +9,6 @@ class OrderItem extends Component {
     this.props.fetchOrderItems(this.props.match.params.id)
   }
   render() {
-    console.log('weird', this.props)
     let price=0
     return (
       <div className="container">
