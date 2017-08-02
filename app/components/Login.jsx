@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
+import { Row, Col, Card, Input, Icon } from 'react-materialize'
+import LoaderButton from './LoaderButton'
 import 'APP/node_modules/materialize-social/materialize-social.css'
 
 export default function Login({
@@ -7,7 +8,8 @@ export default function Login({
   password,
   handleSubmit,
   validateInput,
-  handleInput
+  handleInput,
+  isLoading
 }) {
   return (
     <Row>
@@ -47,22 +49,26 @@ export default function Login({
             </Row>
             <Row>
               <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button
+                <LoaderButton
+                  type="submit"
                   waves="light"
                   className="blue white-text"
                   disabled={!validateInput}
-                >
-                  Log In<Icon left className="white-text">
-                    done
-                  </Icon>
-                </Button>
+                  isLoading={isLoading}
+                  text="Login"
+                  loadingText="Logging in..."
+                />
               </Col>
             </Row>
             <hr />
             <br />
             <Row>
               <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
-                <a className="waves-effect waves-light btn-large social github">
+                <a
+                  className="waves-effect waves-light btn-large social github"
+                  target="_self"
+                  href="/api/auth/login/github"
+                >
                   <i className="fa fa-github" /> Sign in with github
                 </a>
               </Col>
@@ -71,7 +77,11 @@ export default function Login({
             <br />
             <Row>
               <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
-                <a className="waves-effect waves-light btn-large social facebook">
+                <a
+                  className="waves-effect waves-light btn-large social facebook"
+                  target="_self"
+                  href="/api/auth/login/facebook"
+                >
                   <i className="fa fa-facebook" /> Sign in with facebook
                 </a>
               </Col>

@@ -3,6 +3,7 @@ import 'APP/public/signup.css'
 
 // name, email, photo, password
 import { Button, Row, Col, Card, Input, Icon } from 'react-materialize'
+import LoaderButton from './LoaderButton'
 
 export default function SignUp({
   name,
@@ -10,7 +11,8 @@ export default function SignUp({
   password,
   handleInput,
   validateInput,
-  handleSubmit
+  handleSubmit,
+  isLoading
 }) {
   return (
     <Row>
@@ -69,15 +71,15 @@ export default function SignUp({
             </Row>
             <Row>
               <Col offset="s2 m1 l3" s={12} m={8} l={10} className="blue-text">
-                <Button
+                <LoaderButton
+                  type="submit"
+                  isLoading={isLoading}
+                  text="Sign up"
+                  loadingText="Signing up..."
                   disabled={!validateInput}
                   waves="light"
                   className="blue white-text"
-                >
-                  Sign Up<Icon left className="white-text">
-                    create
-                  </Icon>
-                </Button>
+                />
               </Col>
             </Row>
           </form>
