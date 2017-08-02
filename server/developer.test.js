@@ -3,11 +3,7 @@ const { expect } = require('chai')
 const db = require('APP/db'), { Developer } = db
 const app = require('./start')
 
-const louie = {
-  email: 'louie@secrets.org',
-  name: 'Louie',
-  rate: 50
-}
+let idCreated
 
 /* global describe it before afterEach beforeEach */
 describe('/api/developer', () => {
@@ -19,19 +15,21 @@ describe('/api/developer', () => {
       email: 'louie@secrets.org',
       name: 'Louie',
       rate: 50,
-      id: 9999
+    })
+    .then((res) => {
+      return idCreated = res.id
     })
   )
 
-  // describe('GET /developer/:id', () => {
-  //   describe('when getting a developer/:id', () =>
-  //     it('responds with the developer', () => {
-  //       return request(app).get('/api/developer/9999')
-  //         .expect(200)
-  //         .then(res => expect(res.body).to.contain({
-  //           name: 'Louie'
-  //         }))
-  //     })
-  //   )
-  // })
+  describe('GET /developer/:id', () => {
+    describe('when getting a developer/:id', () =>
+      it('responds with the developer', () => {
+        return request(app).get('/api/developer/' + idCreated)
+          .expect(200)
+          .then(res => expect(res.body).to.contain({
+            name: 'Louie'
+          }))
+      })
+    )
+  })
 })
