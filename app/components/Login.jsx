@@ -75,7 +75,11 @@ export default function Login({
             <br />
             <Row>
               <Col offset="s2 m1 l2" s={12} m={10} l={9} className="blue-text">
-                <a className="waves-effect waves-light btn-large social facebook">
+                <a
+                  className="waves-effect waves-light btn-large social facebook"
+                  target="_self"
+                  href="/api/auth/login/facebook"
+                >
                   <i className="fa fa-facebook" /> Sign in with facebook
                 </a>
               </Col>
